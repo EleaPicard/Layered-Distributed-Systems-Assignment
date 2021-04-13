@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Jobs descriptions</title>
+    </h:head>
+    <h:body>
+        <h1>Data Tables of the JobDescriptions</h1>
+        <h:form>
+            <h:dataTable value="#{jobDescriptionBean.allJobDescriptions}" var="jobs"
+                         border='1' width='1000' cellpadding="5">
+                <h:column>
+                    <f:facet name='header'>ID</f:facet>
+                    <h:outputText value="#{jobs.id}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Title</f:facet>
+                    <h:outputText value="#{jobs.title}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Keywords</f:facet>
+                    <h:outputText value="#{jobs.keywords}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Description</f:facet>
+                    <h:outputText value="#{jobs.description}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Payment offer</f:facet>
+                    <h:outputText value="#{jobs.paymentOffer}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>State</f:facet>
+                    <h:outputText value="#{jobs.state}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>State change</f:facet>
+                    <h:selectOneMenu value="#{jobs.state}"
+                                         onchange="submit()">
+                            <f:selectItem itemLabel="Open" itemValue="Open"/>
+                            <f:selectItem itemLabel="Closed" itemValue="Closed"/>
+                            <f:selectItem itemLabel="Completed" itemValue="Completed"/>
+                    </h:selectOneMenu>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Provider Id</f:facet>
+                    <h:outputText value="#{jobs.providerId}"/>
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandButton value="Delete" 
+                                     action="#{jobDescriptionBean.removeJobDescription(jobs)}">
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <br/><br/>
+        <h3>Add Job Description</h3>
+        <hr/>
+        <tr>
+            <td>Title:</td>
+            <td><h:inputText size="20" value="#{jobDescriptionBean.title}" /></td>
+        </tr>
+        <tr>
+            <td>Keywords:</td>
+            <td><h:inputText size="10" value="#{jobDescriptionBean.keywords}" /></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><h:inputText size="10" value="#{jobDescriptionBean.description}" /></td>
+        </tr>
+        <tr>
+            <td>Payment offer</td>
+            <td><h:inputText size="20" value="#{jobDescriptionBean.paymentOffer}" /></td>
+        </tr>
+            <tr>
+            <td>State:</td>
+            <td><h:inputText size="10" value="#{jobDescriptionBean.state}" /></td>
+        </tr>
+        <tr>
+            <td>Provider Id:</td>
+            <td><h:inputText size="10" value="#{jobDescriptionBean.providerId}" /></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td><h:commandButton value="Add job description" 
+                                 action="#{jobDescriptionBean.addJobDescription()}" /></td>
+        </tr>
+        </h:form>
+        
+        <h2>Now a list with all job posted by one provider</h2>
+        <h:form>
+            <h:dataTable value='#{jobDescriptionBean.getJobDescriptionByProviderId(1)}' 
+                         var='jobs' border='1' width='1000' cellpadding="3">
+                <h:column>
+                    <f:facet name='header'>Title</f:facet>
+                        #{jobs.title}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Keywords</f:facet>
+                        #{jobs.keywords}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Description</f:facet>
+                        #{jobs.description}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Payment offer</f:facet>
+                        #{jobs.paymentOffer}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>State</f:facet>
+                        #{jobs.state}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>ProviderId</f:facet>
+                        #{jobs.providerId}
+                </h:column>
+            </h:dataTable>
+            <br/><br/>
+            <h:commandButton value="Home" action="index"/>
+        </h:form>
+    </h:body>
+</html>
