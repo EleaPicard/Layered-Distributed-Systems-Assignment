@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="loginPrompt"
+                      default="Please enter your name"/>
+        <cc:attribute name="loginButtonText" default="Login"/>
+        <cc:attribute name="logAction" 
+                      method-signature="java.lang.String action()"/>
+        <cc:attribute name="bean"/>
+        <cc:editableValueHolder name="nameVal" targets="form:name"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <h:panelGrid columns="2" role="presentation">
+                <h:outputLabel for="name"
+                               value="#{cc.attrs.loginPrompt}"/>
+                <h:inputText id="name"
+                             size="45"
+                             value="#{cc.attrs.bean.userName}"
+                             required="true"/>
+            </h:panelGrid>
+            <p>
+                <h:commandButton id="loginButton"
+                                 value="#{cc.attrs.loginButtonText}"
+                                 action="#{cc.attrs.logAction}">
+                </h:commandButton>
+            </p>
+        </h:form>
+    </cc:implementation>
+</html>

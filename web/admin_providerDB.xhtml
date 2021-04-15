@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./templates/tablesTemplate.xhtml">
+            <ui:define name="content">
+                <h1>Provider Database</h1>
+                
+                <h:form>
+                <h:dataTable value="#{providerBean.allProviders}" var="pro"
+                             border='1' width='300' cellpadding="5">
+                    <h:column>
+                        <f:facet name='header'>ID</f:facet>
+                        <h:outputText value="#{pro.id}"/>
+                        <f:facet name="footer"></f:facet>
+                    </h:column>
+                    <h:column>
+                        <f:facet name='header'>Name</f:facet>
+                        <h:outputText value="#{pro.name}"/>
+                        <f:facet name="footer"></f:facet>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <h:commandButton value="Delete" 
+                                         action="#{providerBean.removeProvider(pro)}">
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+                <br/><br/>
+            <h3>Add Provider</h3>
+            <hr/>
+            <table>
+            <tr>
+                <td>Name:</td>
+                <td><h:inputText size="20" value="#{providerBean.name}" /></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td><h:commandButton value="Add Provider" 
+                                     action="#{providerBean.addProvider()}" /></td>
+            </tr>
+            </table>	          
+            </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
