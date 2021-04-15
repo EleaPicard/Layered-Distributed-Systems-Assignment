@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="logoutButtonText" default="Log out"/>
+        <cc:attribute name="logAction" 
+                      method-signature="java.lang.String action()"/>
+        <cc:attribute name="bean"/>
+        <cc:editableValueHolder name="nameVal" targets="form:name"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <h:commandButton id="logoutButton"
+                             value="#{cc.attrs.logoutButtonText}"
+                             action="#{cc.attrs.logAction}">
+            </h:commandButton>
+        </h:form>
+    </cc:implementation>
+</html>

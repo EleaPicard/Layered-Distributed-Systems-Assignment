@@ -79,4 +79,10 @@ public class UserBean implements Serializable {
         }
         return type;
     }
+    
+    public String logout() {
+        userName="";
+        type="";
+        return "logout";
+    }
 }

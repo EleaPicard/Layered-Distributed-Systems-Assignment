@@ -5,16 +5,19 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <body>
-        <ui:composition template="./templates/tablesTemplate.xhtml">
+        <ui:composition template="./templates/adminTemplate.xhtml">
             <ui:define name="content">
                 <h1> Admin page</h1>
                 <ui:include src="/snippets/full_job_description.xhtml"/>
             </ui:define>
             <ui:define name="bottom">
                 <h:form>
-                    <h:commandButton value="Manage Freelancer" action="p1"/>
-                    <h:commandButton value="Manage Providers" action="p2"/>
-                    <h:commandButton value="Consult logs" action="p3"/>
+                    <h:commandButton value="Manage Freelancer" 
+                                     action="admin_freelancerDB"/>
+                    <h:commandButton value="Manage Providers" 
+                                     action="admin_providerDB"/>
+                    <h:commandButton value="Consult logs" 
+                                     action="admin_logsDB"/>
                 </h:form>
             </ui:define>
         </ui:composition>

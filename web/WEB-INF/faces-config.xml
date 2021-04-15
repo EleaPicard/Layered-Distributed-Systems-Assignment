@@ -22,73 +22,11 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>adminTables.xhtml</from-view-id>
+        <!-- omit from view id: all page -->
         <navigation-case>
-            <from-outcome>p1</from-outcome>
-            <to-view-id>/admin_freelancerDB.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>p2</from-outcome>
-            <to-view-id>/admin_providerDB.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>p3</from-outcome>
-            <to-view-id>/admin_logsDB.xhtml</to-view-id>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>freelancerTables</from-view-id>
-        <navigation-case>
-            <from-outcome>p1</from-outcome>
-            <to-view-id>/freelancer_profile.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>providerTables</from-view-id>
-        <navigation-case>
-            <from-outcome>p1</from-outcome>
-            <to-view-id>/provider_freelancerSelect.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>admin_freelancerDB</from-view-id>
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/faces/adminTables.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>admin_providerDB</from-view-id>
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/adminTables.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>admin_logsDB</from-view-id>
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/adminTables.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>freelancer_profile</from-view-id>
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/freelancerTables.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>provider_freelancerSelect</from-view-id>
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/providerTables.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
+
 </faces-config>

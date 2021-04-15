@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <body>
-        <ui:composition template="./templates/tablesTemplate.xhtml">
+        <ui:composition template="./templates/freelancerTemplate.xhtml">
             <ui:define name="content">
                 <h1> Freelancer page</h1>
                 <!-- <ui:include src="/snippets/full_job_description.xhtml"/> -->
@@ -19,7 +19,8 @@
             </ui:define>
             <ui:define name="bottom">
                 <h:form>
-                    <h:commandButton value="Manage my profile" action="p1"/>
+                    <h:commandButton value="Manage my profile" 
+                                     action="freelancer_profile"/>
                 </h:form>
             </ui:define>
         </ui:composition>
