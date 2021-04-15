@@ -145,5 +145,11 @@ public class Freelancer {
         canEdit = false;
     }
     
+    /**
+     * Default constructor for Freelancer class.
+     */
+    public Freelancer() {
+        canEdit = false;
+    }
     
 }

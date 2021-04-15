@@ -2,17 +2,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
         <ui:composition template="./templates/freelancerTemplate.xhtml">
             <ui:define name="content">
                 <h1>Profile of a freelancer</h1>
-                <div>TODO</div>
-                <ul>
-                    <li>Edit profile of the current freelancer</li>
-                    <li>View the "payment" account of the current freelancer</li>
-                </ul>
+                <h:form>
+                    <h:dataTable value="#{freelancerBean.getFreelancerById(userBean.id)}" var="fre"
+                                 border='1' width='1000' cellpadding="5">
+                        <h:column>
+                            <f:facet name='header'>ID</f:facet>
+                            <h:outputText value="#{fre.id}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Name</f:facet>
+                            <h:outputText value="#{fre.name}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>List of skills</f:facet>
+                            <h:inputText value="#{fre.listOfSkills}" size="10"
+                                         rendered="#{fre.canEdit}"/>
+                            <h:outputText value="#{fre.listOfSkills}"
+                                          rendered="#{not fre.canEdit}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Message</f:facet>
+                            <h:inputText value="#{fre.message}" size="10"
+                                         rendered="#{fre.canEdit}"/>
+                            <h:outputText value="#{fre.message}"
+                                          rendered="#{not fre.canEdit}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Payment account</f:facet>
+                            <h:outputText value="#{fre.paymentAccount}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Edit</f:facet>
+                            <h:commandButton value="Edit" 
+                                             action="#{freelancerBean.editFreelancer(fre)}"
+                                             rendered="#{not fre.canEdit}">
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                    <br/><br/>
+                    <h:commandButton value="Save Freelancers"
+                                     action="#{freelancerBean.saveFreelancer()}" />
+                </h:form>
             </ui:define>
         </ui:composition>
     </body>

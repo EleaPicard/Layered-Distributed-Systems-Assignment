@@ -7,34 +7,82 @@ import java.util.ArrayList;
 
 /**
  *
- * @author vince
+ * @author Vincent Sifferlen
  */
 @Named(value = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
     private String userName;
     private String type;
+    private int id;
     
+    /**
+     * Default constructor.
+     */
     public UserBean() {
         type = "";
     }
     
+    /**
+     * Retrieves user name
+     *
+     * @return
+     */
     public String getUserName() {
         return userName;
     }
     
+    /**
+     * Set new user name
+     *
+     * @param newUserName
+     */
     public void setUserName(String newUserName) {
         userName = newUserName;
     }
     
+    /**
+     * Retrieves user type
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
     
+    /**
+     * Set a new type for the user
+     *
+     * @param newType
+     */
     public void setType(String newType) {
         type = newType;
     }
     
+    /**
+     * Retrieves user ID
+     *
+     * @return
+     */
+    public int getId() {
+        return id;
+    }
+    
+    /**
+     * Set a new ID for the user
+     *
+     * @param newId
+     */
+    public void setId(int newId) {
+        id = newId;
+    }
+    
+    /**
+     * Find the matching user in the data tables and retrieve its ID and type
+     * either administrator, job provider or freelancer
+     *
+     * @return user type
+     */
     public String login() {
         AdministratorBean administrators = new AdministratorBean();
         ProviderBean providers = new ProviderBean();
@@ -49,6 +97,7 @@ public class UserBean implements Serializable {
             adminName = a.getName();
             if(userName.equals(adminName)) {
                 type = "administrator";
+                id = a.getId();
                 break;
             }
         }
@@ -59,6 +108,7 @@ public class UserBean implements Serializable {
                 providerName = p.getName();
                 if (userName.equals(providerName)) {
                     type = "provider";
+                    id = p.getId();
                     break;
                 }
             }
@@ -70,19 +120,27 @@ public class UserBean implements Serializable {
                 freelancerName = f.getName();
                 if (userName.equals(freelancerName)) {
                     type = "freelancer";
+                    id = f.getId();
                     break;
                 }
             }
             if (!type.equals("freelancer")) {
                 type = "error";
+                id = 0;
             }
         }
         return type;
     }
     
+    /**
+     * reset userName and type for log out
+     *
+     * @return "logout" for HTML navigation
+     */
     public String logout() {
         userName="";
         type="";
+        id = 0;
         return "logout";
     }
 }

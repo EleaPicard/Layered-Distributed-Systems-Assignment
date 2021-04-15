@@ -36,6 +36,8 @@ public class JobDescriptionBean implements Serializable {
         if (jobs.size() < 1) {
             jobs.add(new JobDescription(jobs.size()+1,"Engineer","IT","",21053,"open",3));
             jobs.add(new JobDescription(jobs.size()+1,"Mason","Old house","",15869,"closed",1));
+            jobs.add(new JobDescription(jobs.size()+1,"Engineer","Electronic","",23000,"open",4));
+            jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR","",25450,"open",4));
         }
     }
     
@@ -81,6 +83,21 @@ public class JobDescriptionBean implements Serializable {
         return result;
     }
     
+    /**
+     * Return a list of all opened job description
+     *
+     * @return List containing all open job description
+     */
+    public List<JobDescription> getJobDescriptionByState() {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        for (JobDescription j : jobs) {
+            if ("open".equals(j.getState())) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+       
     /**
      * Get the value of the id
      *
