@@ -11,7 +11,6 @@ import javax.faces.validator.*;
 public class MyValidatorLength implements Validator
 {
         private String inp;
-       
 	int maximumlength = 25;
 
 	public MyValidatorLength() {

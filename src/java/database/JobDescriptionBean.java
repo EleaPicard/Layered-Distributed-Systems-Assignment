@@ -93,6 +93,23 @@ public class JobDescriptionBean implements Serializable {
     }
     
     /**
+     * Return a list of all job description with a given id
+     *
+     * @param id Id of provider to look for
+     * @return List containing all job description with given id
+     */
+    public List<JobDescription> getJobDescriptionById(Integer id) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        // find all job description with a given provider and add to result
+        for (JobDescription j : jobs) {
+            if (j.getId().compareTo(id) == 0) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+    
+    /**
      * Return a list of all opened job description
      *
      * @return List containing all open job description
@@ -106,7 +123,7 @@ public class JobDescriptionBean implements Serializable {
         }
         return result;
     }
-       
+           
     /**
      * Get the value of the id
      *

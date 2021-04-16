@@ -56,6 +56,13 @@
                             <f:facet name="footer"></f:facet>
                         </h:column>
                     </h:dataTable>
+                    
+                    <h3>Search by:</h3>
+                    <tr>
+                    <td>Id:</td>
+                    <td><h:inputText id="searchId" value="#{jobDescriptionBean.id}">
+                            <f:validator validatorId="myvalidatorid"/></h:inputText></td>
+                    </tr>
                 </h:form>
                 
             </ui:define>
