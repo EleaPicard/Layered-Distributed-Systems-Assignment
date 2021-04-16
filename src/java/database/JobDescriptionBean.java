@@ -34,10 +34,10 @@ public class JobDescriptionBean implements Serializable {
     public JobDescriptionBean() {
         // add job description if list is empty
         if (jobs.size() < 1) {
-            jobs.add(new JobDescription(jobs.size()+1,"Engineer","IT","",21053,"open",3));
-            jobs.add(new JobDescription(jobs.size()+1,"Mason","Old house","",15869,"closed",1));
-            jobs.add(new JobDescription(jobs.size()+1,"Engineer","Electronic","",23000,"open",4));
-            jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR","",25450,"open",4));
+            jobs.add(new JobDescription(jobs.size()+1,"Engineer","IT","",21053,"Open",3));
+            jobs.add(new JobDescription(jobs.size()+1,"Mason","Old house","",15869,"Closed",1));
+            jobs.add(new JobDescription(jobs.size()+1,"Engineer","Electronic","",23000,"Open",4));
+            jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR","",25450,"Open",4));
         }
     }
     
@@ -56,6 +56,15 @@ public class JobDescriptionBean implements Serializable {
      */
     public void addJobDescription() {
         jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,paymentOffer,state,providerId));
+    }
+    
+    /**
+     * Method to add a new Job Description to the collection. values will be taken
+     * from attributes and the user ID
+     */
+    public void addJobDescriptionProvider(Integer UserID) {
+        state="Open";
+        jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,paymentOffer,state,UserID));
     }
 
     /**
@@ -91,7 +100,7 @@ public class JobDescriptionBean implements Serializable {
     public List<JobDescription> getJobDescriptionByState() {
         ArrayList<JobDescription> result = new ArrayList<>();
         for (JobDescription j : jobs) {
-            if ("open".equals(j.getState())) {
+            if ("Open".equals(j.getState())) {
                 result.add(j);
             }
         }

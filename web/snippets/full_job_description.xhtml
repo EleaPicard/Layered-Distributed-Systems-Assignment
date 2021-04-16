@@ -64,11 +64,13 @@
         <hr/>
         <tr>
             <td>Title:</td>
-            <td><h:inputText size="20" value="#{jobDescriptionBean.title}" /></td>
+            <td><h:inputText id="regex" size="20" value="#{jobDescriptionBean.title}">
+                     <f:validateRegex pattern="[a-zA-Z]{1,20}?"/></h:inputText></td>
         </tr>
         <tr>
             <td>Keywords:</td>
-            <td><h:inputText size="10" value="#{jobDescriptionBean.keywords}" /></td>
+            <td><h:inputText id="string" size="10" value="#{jobDescriptionBean.keywords}">
+                    <f:validateLength minimum="2" maximum="25"/></h:inputText></td>
         </tr>
         <tr>
             <td>Description:</td>
