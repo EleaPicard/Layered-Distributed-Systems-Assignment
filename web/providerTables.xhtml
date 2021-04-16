@@ -62,8 +62,8 @@
                 </tr>
                 <tr>
                     <td>Keywords:</td>
-                    <td><h:inputText id="string" size="10" value="#{jobDescriptionBean.keywords}">
-                    <f:validateLength minimum="2" maximum="25"/></h:inputText></td>
+                    <td><h:inputText id="inp" value="#{jobDescriptionBean.keywords}">
+                            <f:validator validatorId="myvalidatorlength"/></h:inputText></td>
                 </tr>
                 <tr>
                     <td>Description:</td>
