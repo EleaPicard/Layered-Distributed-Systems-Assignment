@@ -18,7 +18,7 @@
                 </ul>
                 
                 <h:form>
-                    <h:dataTable value="#{jobDescriptionBean.getJobDescriptionByState()}" var="jobs"
+                    <h:dataTable value="#{jobDescriptionBean.getAllOpenJobDescription()}" var="jobs"
                          border='1' width='1000' cellpadding="5">
                         <h:column>
                             <f:facet name='header'>ID</f:facet>
@@ -56,6 +56,13 @@
                             <f:facet name="footer"></f:facet>
                         </h:column>
                     </h:dataTable>
+                    
+                    <h3>Search by:</h3>
+                    <tr>
+                    <td>Id:</td>
+                    <td><h:inputText id="searchId" value="#{jobDescriptionBean.id}">
+                            <f:validator validatorId="myvalidatorid"/></h:inputText></td>
+                    </tr>
                 </h:form>
                 
             </ui:define>
