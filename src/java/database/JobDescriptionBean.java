@@ -34,10 +34,17 @@ public class JobDescriptionBean implements Serializable {
     public JobDescriptionBean() {
         // add job description if list is empty
         if (jobs.size() < 1) {
-            jobs.add(new JobDescription(jobs.size()+1,"Engineer","IT","",21053,"Open",3));
-            jobs.add(new JobDescription(jobs.size()+1,"Mason","Old house","",15869,"Closed",1));
-            jobs.add(new JobDescription(jobs.size()+1,"Engineer","Electronic","",23000,"Open",4));
-            jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR","",25450,"Open",4));
+
+            jobs.add(new JobDescription(jobs.size()+1,"Engineer","IT",
+                    "",21053,"Open",3));
+            jobs.add(new JobDescription(jobs.size()+1,"Mason","Old house",
+                    "",15869,"Closed",1));
+            jobs.add(new JobDescription(jobs.size()+1,"Plumber","Old house",
+                    "",16500,"Completed",1));
+            jobs.add(new JobDescription(jobs.size()+1,"Engineer","Electronic",
+                    "",23000,"Open",4));
+            jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR",
+                    "",25450,"Open",4));
         }
     }
     
@@ -51,22 +58,24 @@ public class JobDescriptionBean implements Serializable {
     }
     
     /**
-     * Method to add a new Job Description to the collection. values will be taken
-     * from attributes
+     * Method to add a new Job Description to the collection. 
+     * values will be taken from attributes
      */
     public void addJobDescription() {
-        jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,paymentOffer,state,providerId));
+        jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,
+                paymentOffer,state,providerId));
     }
     
     /**
-     * Method to add a new Job Description to the collection. values will be taken
-     * from attributes and the user ID
+     * Method to add a new Job Description to the collection.values will be taken from attributes and the user ID
+     * @param UserID
      */
     public void addJobDescriptionProvider(Integer UserID) {
         state="Open";
-        jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,paymentOffer,state,UserID));
+        jobs.add(new JobDescription(jobs.size()+1,title,keywords,
+                description,paymentOffer,state,UserID));
     }
-
+    
     /**
      * Method to removes a Job Description from the collection
      * @param j Job Description to be removed
@@ -92,17 +101,39 @@ public class JobDescriptionBean implements Serializable {
         return result;
     }
     
-    /**
-     * Return a list of all job description with a given id
+    /* Return a list of all job description with a given provider that are not 
+     * marked as completed
      *
      * @param id Id of provider to look for
-     * @return List containing all job description with given id
+     * @return List containing all open/closed job description of given provider
      */
-    public List<JobDescription> getJobDescriptionById(Integer id) {
+    public List<JobDescription> 
+        getNotCompletedJobDescriptionByProviderId(Integer id) {
         ArrayList<JobDescription> result = new ArrayList<>();
         // find all job description with a given provider and add to result
         for (JobDescription j : jobs) {
-            if (j.getId().compareTo(id) == 0) {
+            if (j.getProviderId().compareTo(id) == 0 
+                    && !"completed".equals(j.getState())) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+        
+    /**
+     * Return a list of all job description with a given provider that are 
+     * marked as completed
+     *
+     * @param id Id of provider to look for
+     * @return List containing all open/closed job description of given provider
+     */
+    public List<JobDescription> 
+        getCompletedJobDescriptionByProviderId(Integer id) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        // find all job description with a given provider and add to result
+        for (JobDescription j : jobs) {
+            if (j.getProviderId().compareTo(id) == 0 
+                    && "completed".equals(j.getState())) {
                 result.add(j);
             }
         }
@@ -114,7 +145,7 @@ public class JobDescriptionBean implements Serializable {
      *
      * @return List containing all open job description
      */
-    public List<JobDescription> getJobDescriptionByState() {
+    public List<JobDescription> getAllOpenJobDescription() {
         ArrayList<JobDescription> result = new ArrayList<>();
         for (JobDescription j : jobs) {
             if ("Open".equals(j.getState())) {
@@ -123,7 +154,40 @@ public class JobDescriptionBean implements Serializable {
         }
         return result;
     }
-           
+    
+    /**
+     * Return a list of opened job description with corresponding id
+     *
+     * @param id Id of job description to look for
+     * @return list containing open job description with corresponding id
+     */
+    public List<JobDescription> getOpenJobDescriptionById(Integer id) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        for (JobDescription j : jobs) {
+            if ("open".equals(j.getState()) && j.getId().compareTo(id) == 0) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Return a list of opened job description with corresponding keyword
+     *
+     * @param keyword Keyword of job description to look for
+     * @return list containing open job description with corresponding id
+     */
+    public List<JobDescription> getOpenJobDescriptionByKeyword(String keyword) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        for (JobDescription j : jobs) {
+            if ("open".equals(j.getState()) 
+                    && keyword.equals(j.getKeywords())) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+       
     /**
      * Get the value of the id
      *

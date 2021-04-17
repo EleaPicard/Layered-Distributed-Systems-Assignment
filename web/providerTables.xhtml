@@ -8,9 +8,12 @@
     <h:body>
         <ui:composition template="./templates/providerTemplate.xhtml">
             <ui:define name="content">
-                <h1> Provider page</h1>
+                <h1>Provider page</h1>
+                <br/><br/>
+                <h2>Not completed job description</h2>
                 <h:form>
-                    <h:dataTable value='#{jobDescriptionBean.getJobDescriptionByProviderId(userBean.id)}' 
+                    
+                    <h:dataTable value='#{jobDescriptionBean.getNotCompletedJobDescriptionByProviderId(userBean.id)}' 
                              var='jobs' border='1' width='1500' cellpadding="3">
                         <h:column>
                             <f:facet name='header'>Title</f:facet>
@@ -43,7 +46,7 @@
                         <f:facet name="footer"></f:facet>
                         </h:column>
                         <h:column>
-                            <f:facet name='header'>ProviderId</f:facet>
+                            <f:facet name='header'>Provider Id</f:facet>
                                 #{jobs.providerId}
                         </h:column>
                         <h:column>
@@ -53,6 +56,37 @@
                         </h:commandButton>
                         </h:column>
                     </h:dataTable>
+                    
+                    <br/><br/>
+                    <h2>Completed job description</h2>
+                    <h:dataTable value='#{jobDescriptionBean.getCompletedJobDescriptionByProviderId(userBean.id)}' 
+                             var='jobs' border='1' width='1000' cellpadding="3">
+                        <h:column>
+                            <f:facet name='header'>Title</f:facet>
+                                #{jobs.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Keywords</f:facet>
+                                #{jobs.keywords}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Description</f:facet>
+                                #{jobs.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Payment offer</f:facet>
+                                #{jobs.paymentOffer}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>State</f:facet>
+                                #{jobs.state}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Provider Id</f:facet>
+                                #{jobs.providerId}
+                        </h:column>
+                    </h:dataTable>
+                    
                 <h3>Add Job Description</h3>
                 <hr/>
                 <tr>
