@@ -113,7 +113,7 @@ public class JobDescriptionBean implements Serializable {
         // find all job description with a given provider and add to result
         for (JobDescription j : jobs) {
             if (j.getProviderId().compareTo(id) == 0 
-                    && !"completed".equals(j.getState())) {
+                    && !"Completed".equals(j.getState())) {
                 result.add(j);
             }
         }
@@ -133,7 +133,7 @@ public class JobDescriptionBean implements Serializable {
         // find all job description with a given provider and add to result
         for (JobDescription j : jobs) {
             if (j.getProviderId().compareTo(id) == 0 
-                    && "completed".equals(j.getState())) {
+                    && "Completed".equals(j.getState())) {
                 result.add(j);
             }
         }
@@ -164,7 +164,7 @@ public class JobDescriptionBean implements Serializable {
     public List<JobDescription> getOpenJobDescriptionById(Integer id) {
         ArrayList<JobDescription> result = new ArrayList<>();
         for (JobDescription j : jobs) {
-            if ("open".equals(j.getState()) && j.getId().compareTo(id) == 0) {
+            if ("Open".equals(j.getState()) && j.getId().compareTo(id) == 0) {
                 result.add(j);
             }
         }
@@ -180,7 +180,7 @@ public class JobDescriptionBean implements Serializable {
     public List<JobDescription> getOpenJobDescriptionByKeyword(String keyword) {
         ArrayList<JobDescription> result = new ArrayList<>();
         for (JobDescription j : jobs) {
-            if ("open".equals(j.getState()) 
+            if ("Open".equals(j.getState()) 
                     && keyword.equals(j.getKeywords())) {
                 result.add(j);
             }
