@@ -67,7 +67,8 @@ public class JobDescriptionBean implements Serializable {
     }
     
     /**
-     * Method to add a new Job Description to the collection.values will be taken from attributes and the user ID
+     * Method to add a new Job Description to the collection.
+     * values will be taken from attributes and the user ID
      * @param UserID
      */
     public void addJobDescriptionProvider(Integer UserID) {
@@ -313,6 +314,6 @@ public class JobDescriptionBean implements Serializable {
     public void setProviderId(Integer providerId) {
         this.providerId = providerId;
     }
-   
     
+
 }

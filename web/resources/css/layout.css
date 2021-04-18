@@ -54,12 +54,6 @@
     margin-left: 170px;
 }
 
-.right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
-}
-
 #top a:link, #top a:visited {
     color: white;
     font-weight : bold;
