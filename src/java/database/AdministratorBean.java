@@ -21,6 +21,7 @@ public class AdministratorBean implements Serializable {
     private static ArrayList<Administrator> adm = new ArrayList<>();
     private Integer id;
     private String name;
+    private String password;
 
     /**
      * Creates a new instance of AdministratorBean
@@ -28,10 +29,10 @@ public class AdministratorBean implements Serializable {
     public AdministratorBean() {
         // add administrator if list is empty
         if (adm.size() < 1) {
-            adm.add(new Administrator(adm.size()+1,"Anna Murphy"));
-            adm.add(new Administrator(adm.size()+1,"Tom Holly"));
-            adm.add(new Administrator(adm.size()+1,"Peter Smitt"));
-            adm.add(new Administrator(adm.size()+1,"Carola Alvez"));
+            adm.add(new Administrator(adm.size()+1,"Anna Murphy", "$2a$12$8mkMLKSlW48jTtpVGejUvuAu3DOl80c6eDeCsuTd6ANZy5nhW7rdO"));
+            adm.add(new Administrator(adm.size()+1,"Tom Holly", "$2a$12$QqvXBis2Nc6GkLnMHqBDveT3X4EBv8xaXX7llQVZ38K1GRgCoBazG"));
+            adm.add(new Administrator(adm.size()+1,"Peter Smitt", "$2a$12$SIz3Xavkg24vekNeUuArheEK5HZTxTvOjl9Wcb3opUb99Y0wtSltO"));
+            adm.add(new Administrator(adm.size()+1,"Carola Alvez", "$2a$12$u3MQ.r6TMZtyXQK2ydItduDEReQz8WL.e5RDxmIzvaTI7RlJbc10i"));
         }
     }
     
@@ -49,7 +50,7 @@ public class AdministratorBean implements Serializable {
      * from attributes
      */
     public void addAdministrator() {
-        adm.add(new Administrator(adm.size()+1,name));
+        adm.add(new Administrator(adm.size()+1,name,password));
     }
 
     /**
@@ -94,6 +95,24 @@ public class AdministratorBean implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+        
+     /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

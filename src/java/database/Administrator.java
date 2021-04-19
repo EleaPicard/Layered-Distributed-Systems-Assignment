@@ -13,6 +13,7 @@ public class Administrator {
     
     private Integer id;
     private String name;
+    private String password;
 
     /**
      * Get the value of the id
@@ -49,16 +50,36 @@ public class Administrator {
     public void setName(String name) {
         this.name = name;
     }
+    
+    /**
+     * Get the value of name
+     *
+     * @return the value of name
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @param name new value of name
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * Generates an administrator with the given information
      * 
      * @param id unique job ID of the administrator 
      * @param name Name of the administrator
+     * @param password password of the administrator
      */
-    public Administrator(Integer id, String name) {
+    public Administrator(Integer id, String name, String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
     }
     
     

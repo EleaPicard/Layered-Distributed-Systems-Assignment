@@ -4,6 +4,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 @SessionScoped
 public class UserBean implements Serializable {
     private String userName;
+    private String password;
     private String type;
     private int id;
     
@@ -39,6 +42,24 @@ public class UserBean implements Serializable {
      */
     public void setUserName(String newUserName) {
         userName = newUserName;
+    }
+    
+     /**
+     * Retrieves password
+     *
+     * @return
+     */
+    public String getPassword() {
+        return password;
+    }
+    
+    /**
+     * Set new user name
+     *
+     * @param newPassword
+     */
+    public void setPassword(String newPassword) {
+        password = newPassword;
     }
     
     /**
@@ -92,13 +113,21 @@ public class UserBean implements Serializable {
         ArrayList<Provider> pro = providers.getAllProviders();
         ArrayList<Freelancer> free = freelancers.getAllFreelancers();
         
+        
+        
         String adminName;
+
         for (Administrator a : admins) {
             adminName = a.getName();
+            
             if(userName.equals(adminName)) {
-                type = "administrator";
-                id = a.getId();
-                break;
+                String adminPassword = a.getPassword();
+                boolean matched = BCrypt.checkpw(password, adminPassword);
+                if(matched == true){
+                    type = "administrator";
+                    id = a.getId();
+                    break;
+                }
             }
         }
         
@@ -107,9 +136,13 @@ public class UserBean implements Serializable {
             for (Provider p : pro) {
                 providerName = p.getName();
                 if (userName.equals(providerName)) {
-                    type = "provider";
-                    id = p.getId();
-                    break;
+                    String providerPassword = p.getPassword();
+                    boolean matched = BCrypt.checkpw(password, providerPassword);
+                    if(matched == true){
+                        type = "provider";
+                        id = p.getId();
+                        break;
+                    }
                 }
             }
         }
@@ -119,9 +152,13 @@ public class UserBean implements Serializable {
             for (Freelancer f : free) {
                 freelancerName = f.getName();
                 if (userName.equals(freelancerName)) {
-                    type = "freelancer";
-                    id = f.getId();
-                    break;
+                    String freelancerPassword = f.getPassword();
+                    boolean matched = BCrypt.checkpw(password, freelancerPassword);
+                    if(matched == true){
+                        type = "freelancer";
+                        id = f.getId();
+                        break;
+                    }
                 }
             }
             if (!type.equals("freelancer")) {

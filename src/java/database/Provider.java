@@ -13,6 +13,7 @@ public class Provider {
     
     private Integer id;
     private String name;
+    private String password;
 
 
     /**
@@ -50,6 +51,24 @@ public class Provider {
     public void setName(String name) {
         this.name = name;
     }
+        
+    /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * Generates a provider with the given information
@@ -57,9 +76,10 @@ public class Provider {
      * @param id unique job ID of the provider 
      * @param name Name of the provider
      */
-    public Provider(Integer id, String name) {
+    public Provider(Integer id, String name, String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
     }
     
 }

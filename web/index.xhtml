@@ -14,11 +14,19 @@ and open the template in the editor.
     </h:head>
     
     <h:body style="font-size: 24px">
-        <h1>Log in to the website</h1>
-        <div>
-            <ez:userLogin bean="#{userBean}"
-                          logAction="#{userBean.login}"/>
-        </div>
+        <h1>Log in to the website </h1>
+        <h:form>
+            <h:outputLabel value="Username: " />
+            <h:inputText value="#{userBean.userName}" />
+            
+            <h:outputLabel value="Password: " />
+            <h:inputSecret value="#{userBean.password}" />
+            
+            <h:commandButton value="login" action="#{userBean.login}" />
+            
+                          
+            
+        </h:form>
     </h:body>
     
 </html>

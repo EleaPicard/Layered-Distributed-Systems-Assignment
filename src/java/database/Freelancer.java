@@ -16,6 +16,7 @@ public class Freelancer {
     private String listOfSkills;
     private String message;
     private double paymentAccount;
+    private String password;
     private boolean canEdit;
 
     /**
@@ -107,6 +108,24 @@ public class Freelancer {
     public void setPaymentAccount(double paymentAccount) {
         this.paymentAccount = paymentAccount;
     }
+    
+    /**
+     * Get the value of password
+     *
+     * @return the value of name
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @param password new value of name
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * Accessor for isEdit
@@ -133,15 +152,17 @@ public class Freelancer {
      * @param name Name of the freelancer
      * @param listOfSkills list of skills of the freelancer
      * @param message message of the freelancer
-     * @param paymentAccount amount in the payment account of the freelancer 
+     * @param paymentAccount amount in the payment account of the freelancer
+     * @param password password of freelancer
      * @param canEdit indicates if this object can be edited
      */
-    public Freelancer(Integer id, String name, String listOfSkills, String message, double paymentAccount) {
+    public Freelancer(Integer id, String name, String listOfSkills, String message, double paymentAccount, String password) {
         this.id = id;
         this.name = name;
         this.listOfSkills = listOfSkills;
         this.message = message;
         this.paymentAccount = paymentAccount;
+        this.password = password;
         canEdit = false;
     }
     
