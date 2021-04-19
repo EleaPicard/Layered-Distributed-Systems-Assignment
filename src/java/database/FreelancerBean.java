@@ -65,6 +65,23 @@ public class FreelancerBean implements Serializable {
     }
     
     /**
+     * Return the Freelancer name with the corresponding ID
+     *
+     * @param id ID of freelancer to look for
+     * @return Name of the freelancer
+     */
+    public String getFreelancerNameById(Integer id) {
+        String name ="";
+        // find all job description with a given provider and add to result
+        for (Freelancer f : fre) {
+            if (f.getId().compareTo(id) == 0) {
+                name = f.getName();
+            }
+        }
+        return name;
+    }
+    
+    /**
      * Method to add a new freelancer to the collection. values will be taken
      * from attributes
      */

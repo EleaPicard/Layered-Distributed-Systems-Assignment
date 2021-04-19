@@ -96,35 +96,35 @@ public class UserBean implements Serializable {
         for (Administrator a : admins) {
             adminName = a.getName();
             if(userName.equals(adminName)) {
-                type = "administrator";
+                type = "Administrator";
                 id = a.getId();
                 break;
             }
         }
         
-        if (!type.equals("administrator")){
+        if (!type.equals("Administrator")){
             String providerName;
             for (Provider p : pro) {
                 providerName = p.getName();
                 if (userName.equals(providerName)) {
-                    type = "provider";
+                    type = "Provider";
                     id = p.getId();
                     break;
                 }
             }
         }
             
-        if (!type.equals("administrator") && !type.equals("provider")) {
+        if (!type.equals("Administrator") && !type.equals("Provider")) {
             String freelancerName;
             for (Freelancer f : free) {
                 freelancerName = f.getName();
                 if (userName.equals(freelancerName)) {
-                    type = "freelancer";
+                    type = "Freelancer";
                     id = f.getId();
                     break;
                 }
             }
-            if (!type.equals("freelancer")) {
+            if (!type.equals("Freelancer")) {
                 type = "error";
                 id = 0;
             }

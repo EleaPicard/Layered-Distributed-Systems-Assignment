@@ -73,12 +73,12 @@
                     <table>
                     <tr>
                         <td>Job Description ID:</td>
-                        <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}" /></td>
+                        <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}"/></td>
                     </tr>
                     <tr>
                         <td> </td>
                         <td><h:commandButton value="Submit application"
-                                             action="#{jobApplicationBean.addJobApplicationFreelancer(userBean.id, jobDescriptionBean)}" /></td>
+                                             action="#{jobApplicationBean.addJobApplicationFreelancer(userBean.id, jobDescriptionBean, userBean.type, userBean.userName)}" /></td>
                     </tr>
                     </table>
                 </h:form>

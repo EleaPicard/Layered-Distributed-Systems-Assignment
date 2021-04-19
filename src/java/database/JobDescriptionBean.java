@@ -20,6 +20,8 @@ import java.util.List;
 public class JobDescriptionBean implements Serializable {
     
     private static ArrayList<JobDescription> jobs = new ArrayList<>();
+    LogBean logs = new LogBean();
+    ArrayList<Log> logsList = logs.getAllLogs();
     private Integer id;
     private String title;
     private String keywords;
@@ -100,6 +102,23 @@ public class JobDescriptionBean implements Serializable {
             }
         }
         return result;
+    }
+    
+    /**
+     * Return a the title of a job description with a given provider
+     *
+     * @param id Id of provider to look for
+     * @return Title of a job description with given provider
+     */
+    public String getJobDescriptionTitleById(Integer id) {
+        String title="";
+        // find all job description with a given provider
+        for (JobDescription j : jobs) {
+            if (j.getId().compareTo(id) == 0) {
+                title=j.getTitle();
+            }
+        }
+        return title;
     }
     
     /**
@@ -246,13 +265,20 @@ public class JobDescriptionBean implements Serializable {
         freeBean.payFreelancer(freeId, payment);
     }
     
-    public void jobClosed (JobApplication a) {
+    public void jobClosedProvider (JobApplication a, String type, String user) {
         for (JobDescription j : jobs) {
             if (j.getId().compareTo(a.getDescriptionId()) == 0) {
                 j.setState("Closed");
+                logs.addLogJobClosed(type, user);
             }
         }
     }
+    
+    public void undertakeJob (String type, String user) {
+        logs.addLogUndertakeJob(type, user);
+    }
+    
+    
        
     /**
      * Get the value of the id

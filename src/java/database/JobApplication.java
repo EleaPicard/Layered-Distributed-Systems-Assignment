@@ -8,8 +8,10 @@ public class JobApplication {
     private Integer applicationId;
     private Integer providerId;
     private Integer descriptionId;
+    private String descriptionTitle;
     private Integer freelancerId;
     private String state;
+    private String freelancerName;
     
     /**
      * Generate a job Application with the given information
@@ -20,11 +22,15 @@ public class JobApplication {
      * @param freelancerId ID of the freelancer
      * @param state state of the application
      */
-    public JobApplication(Integer applicationId, Integer providerId, Integer descriptionId, Integer freelancerId, String state) {
+    public JobApplication(Integer applicationId, Integer providerId, 
+            Integer descriptionId, String descriptionTitle,Integer freelancerId,
+            String freelancerName, String state) {
         this.applicationId = applicationId;
         this.providerId = providerId;
         this.descriptionId = descriptionId;
+        this.descriptionTitle = descriptionTitle;
         this.freelancerId = freelancerId;
+        this.freelancerName = freelancerName;
         this.state = state;
     }
     
@@ -70,12 +76,30 @@ public class JobApplication {
     }
     
     /**
+     * Get the Title of the job description for a job application
+     *
+     * @return Title of the job description
+     */
+    public String getDescriptionTitle() {
+        return descriptionTitle;
+    }
+    
+    /**
      * Get the Id of a freelancer applying for a Job Application
      *
      * @return Integer of freelancer ID
      */
     public Integer getFreelancerId() {
         return freelancerId;
+    }
+
+    /**
+     * Get the name of a freelancer applying for a Job Application
+     *
+     * @return Integer of freelancer name
+     */
+    public String getFreelancerName() {
+        return freelancerName;
     }
     
     /**
@@ -119,6 +143,15 @@ public class JobApplication {
     public void setDescriptionId(Integer descriptionId) {
         this.descriptionId = descriptionId;
     }
+    
+    /**
+     * Set the job description title of a job application
+     *
+     * @param descriptionTitle Title of the job description
+     */
+    public void setDescriptionTitle(String descriptionTitle) {
+        this.descriptionTitle = descriptionTitle;
+    }
 
     /**
      * Set the Id of a freelancer on a Job Application
@@ -127,6 +160,15 @@ public class JobApplication {
      */
     public void setFreelancerId(Integer freelancerId) {
         this.freelancerId = freelancerId;
+    }
+
+    /**
+     * Set the name of a freelancer on a Job Application
+     *
+     * @param freelancerName new freelancer name
+     */
+    public void setFreelancerName(String freelancerName) {
+        this.freelancerName = freelancerName;
     }
     
     /**

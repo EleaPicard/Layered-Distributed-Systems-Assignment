@@ -27,8 +27,21 @@
                                 #{a.descriptionId}
                         </h:column>
                         <h:column>
+                            <f:facet name='header'>Job description title</f:facet>
+                            <h:commandLink action="providerTables"> #{a.descriptionTitle}
+                        </h:commandLink>
+                        </h:column>
+                        <h:column>
                             <f:facet name='header'>Freelancer ID</f:facet>
                                 #{a.freelancerId}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Freelancer Name</f:facet>
+                                #{a.freelancerName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Application state</f:facet>
+                                #{a.state}
                         </h:column>
                     </h:dataTable>
                 </h:form>
@@ -39,12 +52,13 @@
                     <table>
                         <tr>
                             <td>Job Application ID:</td>
-                            <td><h:inputText size="4" value="#{jobApplicationBean.applicationId}" /></td>
+                            <td><h:inputText id="searchId" size="4" value="#{jobApplicationBean.applicationId}">
+                                    <f:validator validatorId="myvalidatorapplyid"/></h:inputText></td>
                         </tr>
                         <tr>
                             <td> </td>
                             <td><h:commandButton value="Submit application"
-                                                 action="#{jobApplicationBean.acceptApplication(jobDescriptionBean)}" /></td>
+                                                 action="#{jobApplicationBean.acceptApplication(jobDescriptionBean,userBean.type,userBean.userName,userBean.id)}" /></td>
                         </tr>
                     </table> 
                 </h:form>

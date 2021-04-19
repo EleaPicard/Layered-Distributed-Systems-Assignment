@@ -117,5 +117,22 @@ public class LogBean implements Serializable {
     public void setAction(String action) {
         this.action = action;
     }
+    
+    /**
+     * Method to add a new log to the collection when a job is closed.
+     * Values will be taken from attributes
+     */
+    public void addLogJobClosed(String type, String actionerName) {
+        logs.add(new Log(type, actionerName, "Has marked a job as closed "
+                + "and accept a provider"));
+    }
+    
+    /**
+     * Method to add a new log to the collection when a job is closed.
+     * Values will be taken from attributes
+     */
+    public void addLogUndertakeJob(String type, String actionerName) {
+        logs.add(new Log(type, actionerName, "Has offer to undertake a job"));
+    }
 
 }
