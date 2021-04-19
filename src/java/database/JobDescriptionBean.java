@@ -237,6 +237,22 @@ public class JobDescriptionBean implements Serializable {
         }
         return result;
     }
+    
+    public void jobCompleted (JobDescription j, JobApplicationBean appBean, FreelancerBean freeBean) {
+        j.setState("Completed");
+        double payment = j.getPaymentOffer();
+        Integer descId = j.getId();
+        Integer freeId = appBean.getFreelancerFromDescription(descId);
+        freeBean.payFreelancer(freeId, payment);
+    }
+    
+    public void jobClosed (JobApplication a) {
+        for (JobDescription j : jobs) {
+            if (j.getId().compareTo(a.getDescriptionId()) == 0) {
+                j.setState("Closed");
+            }
+        }
+    }
        
     /**
      * Get the value of the id

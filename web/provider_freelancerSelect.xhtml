@@ -30,13 +30,23 @@
                             <f:facet name='header'>Freelancer ID</f:facet>
                                 #{a.freelancerId}
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">Manage Application</f:facet>
-                            <h:commandButton value="Accept" 
-                                             action="#{jobApplicationBean.acceptApplication(a)}">
-                            </h:commandButton>
-                        </h:column>
                     </h:dataTable>
+                </h:form>
+                
+                <h:form>
+                   <br/>
+                <h3>Accept application</h3>
+                    <table>
+                        <tr>
+                            <td>Job Application ID:</td>
+                            <td><h:inputText size="4" value="#{jobApplicationBean.applicationId}" /></td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td><h:commandButton value="Submit application"
+                                                 action="#{jobApplicationBean.acceptApplication(jobDescriptionBean)}" /></td>
+                        </tr>
+                    </table> 
                 </h:form>
                 
             </ui:define>

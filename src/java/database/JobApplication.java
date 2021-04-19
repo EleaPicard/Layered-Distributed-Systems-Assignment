@@ -28,6 +28,16 @@ public class JobApplication {
         this.state = state;
     }
     
+    public JobApplication() {
+    }
+    
+    public JobApplication(JobApplication o) {
+        this.applicationId = o.getApplicationId();
+        this.providerId = o.getProviderId();
+        this.descriptionId = o.getDescriptionId();
+        this.state = o.getState();
+    }
+    
     //////////////
     // GETTERS //
     ////////////

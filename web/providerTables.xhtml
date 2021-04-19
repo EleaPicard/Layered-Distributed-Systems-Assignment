@@ -45,6 +45,8 @@
                             </h:commandButton>
                         </h:column>
                     </h:dataTable>
+                </h:form>
+                <h:form>
                 <h3>Add Job Description</h3>
                 <hr/>
                 <tr>
@@ -100,6 +102,11 @@
                         <h:column>
                             <f:facet name='header'>Provider Id</f:facet>
                                 #{jobs.providerId}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Complete Job</f:facet>
+                            <h:commandButton value="Completed"
+                                             action="#{jobDescriptionBean.jobCompleted(jobs, jobApplicationBean, freelancerBean)}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>

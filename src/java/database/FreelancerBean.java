@@ -187,4 +187,13 @@ public class FreelancerBean implements Serializable {
         this.paymentAccount = paymentAccount;
     }
     
+    public void payFreelancer(Integer freeId, double payment) {
+        for (Freelancer f : fre) {
+            if (f.getId().compareTo(freeId) == 0) {
+                double current = f.getPaymentAccount();
+                f.setPaymentAccount(current + payment);
+            }
+        }
+    }
+    
 }

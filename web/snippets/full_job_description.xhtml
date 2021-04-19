@@ -4,62 +4,64 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h1>Data Tables of the Job Descriptions</h1>
-        <h:form>
-            <h:dataTable value="#{jobDescriptionBean.allJobDescriptions}" var="jobs"
-                         border='1' width='1000' cellpadding="5">
-                <h:column>
-                    <f:facet name='header'>ID</f:facet>
-                    <h:outputText value="#{jobs.id}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>Title</f:facet>
-                    <h:outputText value="#{jobs.title}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>Keywords</f:facet>
-                    <h:outputText value="#{jobs.keywords}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>Description</f:facet>
-                    <h:outputText value="#{jobs.description}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>Payment offer</f:facet>
-                    <h:outputText value="#{jobs.paymentOffer}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>State</f:facet>
-                    <h:outputText value="#{jobs.state}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>State change</f:facet>
-                    <h:selectOneMenu value="#{jobs.state}"
-                                         onchange="submit()">
-                            <f:selectItem itemLabel="Open" itemValue="Open"/>
-                            <f:selectItem itemLabel="Closed" itemValue="Closed"/>
-                            <f:selectItem itemLabel="Completed" itemValue="Completed"/>
-                    </h:selectOneMenu>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name='header'>Provider Id</f:facet>
-                    <h:outputText value="#{jobs.providerId}"/>
-                    <f:facet name="footer"></f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Delete</f:facet>
-                    <h:commandButton value="Delete" 
-                                     action="#{jobDescriptionBean.removeJobDescription(jobs)}">
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
-            <br/><br/>
+    <h:form>
+        <h:dataTable value="#{jobDescriptionBean.allJobDescriptions}" var="jobs"
+                     border='1' width='1000' cellpadding="5">
+            <h:column>
+                <f:facet name='header'>ID</f:facet>
+                <h:outputText value="#{jobs.id}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>Title</f:facet>
+                <h:outputText value="#{jobs.title}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>Keywords</f:facet>
+                <h:outputText value="#{jobs.keywords}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>Description</f:facet>
+                <h:outputText value="#{jobs.description}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>Payment offer</f:facet>
+                <h:outputText value="#{jobs.paymentOffer}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>State</f:facet>
+                <h:outputText value="#{jobs.state}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>State change</f:facet>
+                <h:selectOneMenu value="#{jobs.state}"
+                                     onchange="submit()">
+                        <f:selectItem itemLabel="Open" itemValue="Open"/>
+                        <f:selectItem itemLabel="Closed" itemValue="Closed"/>
+                        <f:selectItem itemLabel="Completed" itemValue="Completed"/>
+                </h:selectOneMenu>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name='header'>Provider Id</f:facet>
+                <h:outputText value="#{jobs.providerId}"/>
+                <f:facet name="footer"></f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton value="Delete" 
+                                 action="#{jobDescriptionBean.removeJobDescription(jobs)}">
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:form>
+        <br/><br/>
         <h3>Add Job Description</h3>
         <hr/>
         <tr>
@@ -93,5 +95,5 @@
             <td><h:commandButton value="Add job description" 
                                  action="#{jobDescriptionBean.addJobDescription()}" /></td>
         </tr>
-        </h:form>    
+    </h:form>  
 </ui:composition>

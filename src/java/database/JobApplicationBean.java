@@ -188,7 +188,7 @@ public class JobApplicationBean implements Serializable {
     }
     
     /**
-     * Return a list of all job applications with a given job description id
+     * Return a list of all job applications with a given freelancer id
      *
      * @param id Id of job description to look for
      * @return List containing all job applications with given description
@@ -204,15 +204,39 @@ public class JobApplicationBean implements Serializable {
         return result;
     }
     
-    public void acceptApplication(JobApplication a) {
-        a.setState("Closed");
+    public String acceptApplication(JobDescriptionBean jobDesc) {
+        Integer des_id = 0;
+        JobApplication a = new JobApplication();
         for (JobApplication app : applications) {
-            if (app.getDescriptionId().compareTo(a.getDescriptionId()) == 0) {
-                if (app.getState().equals("Open")) {
+            if (app.getApplicationId().compareTo(applicationId) == 0) {
+                app.setState("Accepted");
+                des_id = app.getDescriptionId();
+                a = new JobApplication(app);
+            }
+        }
+        for (JobApplication app : applications) {
+            if (app.getDescriptionId().compareTo(des_id) == 0) {
+                if ("Pending".equals(app.getState())) {
                     applications.remove(app);
                 }
             }
         }
+        
+        jobDesc.jobClosed(a);
+        
+        return "providerTables";
+    }
+    
+    public Integer getFreelancerFromDescription(Integer descId) {
+        Integer freeId = 0;
+        for (JobApplication a : applications) {
+            if (a.getDescriptionId().compareTo(descId) == 0) {
+                if("Accepted".equals(a.getState())) {
+                    freeId = a.getFreelancerId();
+                }
+            }
+        }
+        return freeId;
     }
     
 }
