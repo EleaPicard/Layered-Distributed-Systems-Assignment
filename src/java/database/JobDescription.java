@@ -167,5 +167,10 @@ public class JobDescription {
         this.providerId = providerId;
     }
     
+    /**
+     * Default constructor.
+     */
+    public JobDescription() {
+    }
     
 }

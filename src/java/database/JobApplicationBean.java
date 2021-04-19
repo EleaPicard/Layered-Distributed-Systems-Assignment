@@ -15,16 +15,22 @@ import java.util.List;
 public class JobApplicationBean implements Serializable {
     private static ArrayList<JobApplication> applications = new ArrayList<>();
     private Integer applicationId;
+    private Integer providerId;
     private Integer descriptionId;
     private Integer freelancerId;
+    private String state;
 
     public JobApplicationBean() {
         // add job application if list is empty
         if (applications.size() < 1) {
-            applications.add(new JobApplication(applications.size()+1,2,1));
-            applications.add(new JobApplication(applications.size()+1,4,2));
-            applications.add(new JobApplication(applications.size()+1,2,4));
-            applications.add(new JobApplication(applications.size()+1,1,1));
+            applications.add(new JobApplication(
+                    applications.size()+1,4,4,1, "Pending"));
+            applications.add(new JobApplication(
+                    applications.size()+1,4,4,2, "Pending"));
+            applications.add(new JobApplication(
+                    applications.size()+1,1,2,3, "Accepted"));
+            applications.add(new JobApplication(
+                    applications.size()+1,3,1,1, "Pending"));
         }
     }
     
@@ -49,6 +55,15 @@ public class JobApplicationBean implements Serializable {
     public Integer getApplicationId() {
         return applicationId;
     }
+    
+    /**
+     * Get the Id of the job provider for a job application
+     *
+     * @return ID of the job provider
+     */
+    public Integer getProviderId() {
+        return providerId;
+    }
 
     /**
      * Get the Id of the job description for a job application
@@ -68,6 +83,15 @@ public class JobApplicationBean implements Serializable {
         return freelancerId;
     }
     
+    /**
+     * Get the state of a job application
+     *
+     * @return state of the application
+     */
+    public String getState() {
+        return state;
+    }
+    
     //////////////
     // SETTERS //
     ////////////
@@ -79,6 +103,15 @@ public class JobApplicationBean implements Serializable {
      */
     public void setApplicationId(Integer applicationId) {
         this.applicationId = applicationId;
+    }
+    
+    /**
+     * Set the job provider Id of a job application
+     *
+     * @param providerId ID of the job provider
+     */
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
     }
 
     /**
@@ -99,6 +132,10 @@ public class JobApplicationBean implements Serializable {
         this.freelancerId = freelancerId;
     }
     
+    public void setState(String newState) {
+        this.state = newState;
+    }
+    
     //////////////
     // METHODS //
     ////////////
@@ -109,17 +146,20 @@ public class JobApplicationBean implements Serializable {
      */
     public void addJobApplication() {
         applications.add(new JobApplication(
-                applications.size()+1, descriptionId, freelancerId));
+                applications.size()+1, providerId, descriptionId, freelancerId, "Pending"));
     }
     
     /**
      * Method to add a new Job Application to the collection.
      * values will be taken from descriptionId attribute and the freelancer ID
+     * 
      * @param userID
+     * @param jobs
      */
-    public void addJobApplicationFreelancer(Integer userID) {
+    public void addJobApplicationFreelancer(Integer userID, JobDescriptionBean jobs) {
+        JobDescription j = jobs.getJobDescriptionById(descriptionId);
         applications.add(new JobApplication(
-                applications.size()+1, descriptionId, userID));
+                applications.size()+1, j.getId(), descriptionId, userID, "Pending"));
     }
     
     /**
@@ -136,11 +176,11 @@ public class JobApplicationBean implements Serializable {
      * @param id Id of job description to look for
      * @return List containing all job applications with given description
      */
-    public List<JobApplication> getJobApplicationByDesciptionId(Integer id) {
+    public List<JobApplication> getJobApplicationByProviderId(Integer id) {
         ArrayList<JobApplication> result = new ArrayList<>();
         // find all applications for a given job description and add to result
         for (JobApplication a : applications) {
-            if (a.getDescriptionId().compareTo(id) == 0) {
+            if (a.getProviderId().compareTo(id) == 0) {
                 result.add(a);
             }
         }
@@ -162,6 +202,17 @@ public class JobApplicationBean implements Serializable {
             }
         }
         return result;
+    }
+    
+    public void acceptApplication(JobApplication a) {
+        a.setState("Closed");
+        for (JobApplication app : applications) {
+            if (app.getDescriptionId().compareTo(a.getDescriptionId()) == 0) {
+                if (app.getState().equals("Open")) {
+                    applications.remove(app);
+                }
+            }
+        }
     }
     
 }

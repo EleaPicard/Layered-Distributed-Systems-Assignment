@@ -10,11 +10,10 @@
             <ui:define name="content">
                 <h1>Provider page</h1>
                 <br/><br/>
-                <h2>Not completed job description</h2>
+                <h2>Open job description</h2>
                 <h:form>
-                    
-                    <h:dataTable value='#{jobDescriptionBean.getNotCompletedJobDescriptionByProviderId(userBean.id)}' 
-                             var='jobs' border='1' width='1500' cellpadding="3">
+                    <h:dataTable value='#{jobDescriptionBean.getOpenJobDescriptionByProviderId(userBean.id)}' 
+                             var='jobs' border='1' width='1000' cellpadding="3">
                         <h:column>
                             <f:facet name='header'>Title</f:facet>
                                 #{jobs.title}
@@ -36,16 +35,6 @@
                                 #{jobs.state}
                         </h:column>
                         <h:column>
-                        <f:facet name='header'>State change</f:facet>
-                        <h:selectOneMenu value="#{jobs.state}"
-                                             onchange="submit()">
-                                <f:selectItem itemLabel="Open" itemValue="Open"/>
-                                <f:selectItem itemLabel="Closed" itemValue="Closed"/>
-                                <f:selectItem itemLabel="Completed" itemValue="Completed"/>
-                        </h:selectOneMenu>
-                        <f:facet name="footer"></f:facet>
-                        </h:column>
-                        <h:column>
                             <f:facet name='header'>Provider Id</f:facet>
                                 #{jobs.providerId}
                         </h:column>
@@ -56,7 +45,65 @@
                             </h:commandButton>
                         </h:column>
                     </h:dataTable>
-                    
+                <h3>Add Job Description</h3>
+                <hr/>
+                <tr>
+                    <td>Title:</td>
+                    <td><h:inputText id="regex" size="20" value="#{jobDescriptionBean.title}">
+                     <f:validateRegex pattern="[a-zA-Z]{1,20}?"/></h:inputText></td>
+                </tr>
+                <tr>
+                    <td>Keywords:</td>
+                    <td><h:inputText id="inp" value="#{jobDescriptionBean.keywords}">
+                            <f:validator validatorId="myvalidatorlength"/></h:inputText></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><h:inputText size="20" value="#{jobDescriptionBean.description}" /></td>
+                </tr>
+                <tr>
+                    <td>Payment offer</td>
+                    <td><h:inputText size="20" value="#{jobDescriptionBean.paymentOffer}" /></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td><h:commandButton value="Add job description" 
+                                         action="#{jobDescriptionBean.addJobDescriptionProvider(userBean.id)}" /></td>
+                </tr>
+                </h:form>
+                
+                <h:form>
+                    <br/><br/>
+                    <h2>Closed job description</h2>
+                    <h:dataTable value='#{jobDescriptionBean.getClosedJobDescriptionByProviderId(userBean.id)}' 
+                             var='jobs' border='1' width='1000' cellpadding="3">
+                        <h:column>
+                            <f:facet name='header'>Title</f:facet>
+                                #{jobs.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Keywords</f:facet>
+                                #{jobs.keywords}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Description</f:facet>
+                                #{jobs.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Payment offer</f:facet>
+                                #{jobs.paymentOffer}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>State</f:facet>
+                                #{jobs.state}
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Provider Id</f:facet>
+                                #{jobs.providerId}
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                <h:form>
                     <br/><br/>
                     <h2>Completed job description</h2>
                     <h:dataTable value='#{jobDescriptionBean.getCompletedJobDescriptionByProviderId(userBean.id)}' 
@@ -86,39 +133,14 @@
                                 #{jobs.providerId}
                         </h:column>
                     </h:dataTable>
-                    
-                <h3>Add Job Description</h3>
-                <hr/>
-                <tr>
-                    <td>Title:</td>
-                    <td><h:inputText id="regex" size="20" value="#{jobDescriptionBean.title}">
-                     <f:validateRegex pattern="[a-zA-Z]{1,20}?"/></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Keywords:</td>
-                    <td><h:inputText id="inp" value="#{jobDescriptionBean.keywords}">
-                            <f:validator validatorId="myvalidatorlength"/></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td><h:inputText size="20" value="#{jobDescriptionBean.description}" /></td>
-                </tr>
-                <tr>
-                    <td>Payment offer</td>
-                    <td><h:inputText size="20" value="#{jobDescriptionBean.paymentOffer}" /></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td><h:commandButton value="Add job description" 
-                                         action="#{jobDescriptionBean.addJobDescriptionProvider(userBean.id)}" /></td>
-                </tr>
                 </h:form>
             </ui:define>
             
             <ui:define name="bottom">
                 <h:form>
-                    <h:commandButton value="Manage job applications" 
-                                     action="provider_freelancerSelect"/>
+                    <h:commandButton 
+                        value="Manage Applications" action="provider_freelancerSelect">
+                    </h:commandButton>
                 </h:form>
             </ui:define>
             

@@ -102,8 +102,9 @@ public class JobDescriptionBean implements Serializable {
         return result;
     }
     
-    /* Return a list of all job description with a given provider that are not 
-     * marked as completed
+    /**
+     * Return a list of all job description with a given provider that are not 
+     * marked as Completed
      *
      * @param id Id of provider to look for
      * @return List containing all open/closed job description of given provider
@@ -115,6 +116,44 @@ public class JobDescriptionBean implements Serializable {
         for (JobDescription j : jobs) {
             if (j.getProviderId().compareTo(id) == 0 
                     && !"Completed".equals(j.getState())) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+        
+    /**
+     * Return a list of all job description with a given provider that are  
+     * marked as Open
+     *
+     * @param id Id of provider to look for
+     * @return List containing all Open job description of given provider
+     */
+    public List<JobDescription> getOpenJobDescriptionByProviderId(Integer id) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        // find all job description with a given provider and add to result
+        for (JobDescription j : jobs) {
+            if (j.getProviderId().compareTo(id) == 0 
+                    && "Open".equals(j.getState())) {
+                result.add(j);
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Return a list of all job description with a given provider that are  
+     * marked as Closed
+     *
+     * @param id Id of provider to look for
+     * @return List containing all Closed job description of given provider
+     */
+    public List<JobDescription> getClosedJobDescriptionByProviderId(Integer id) {
+        ArrayList<JobDescription> result = new ArrayList<>();
+        // find all job description with a given provider and add to result
+        for (JobDescription j : jobs) {
+            if (j.getProviderId().compareTo(id) == 0 
+                    && "Closed".equals(j.getState())) {
                 result.add(j);
             }
         }
@@ -184,6 +223,16 @@ public class JobDescriptionBean implements Serializable {
             if ("Open".equals(j.getState()) 
                     && keyword.equals(j.getKeywords())) {
                 result.add(j);
+            }
+        }
+        return result;
+    }
+    
+    public JobDescription getJobDescriptionById(Integer id) {
+        JobDescription result = new JobDescription();
+        for (JobDescription j : jobs) {
+            if (j.getId().compareTo(id) == 0) {
+                result = j;
             }
         }
         return result;
