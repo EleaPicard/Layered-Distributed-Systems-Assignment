@@ -58,12 +58,15 @@
                         </h:column>
                     </h:dataTable>
                     
+                    <ul>
                     <h3>Search by:</h3>
-                    <tr>
-                    <td>Id:</td>
-                    <td><h:inputText id="searchId" value="#{jobDescriptionBean.id}">
-                            <f:validator validatorId="myvalidatorid"/></h:inputText></td>
-                    </tr>
+                    <td><h:inputText id="searchId" value="#{freelancerSearch.id}"/></td>
+                    <td><h:commandButton value="Id" 
+                                     action="freelancerTablesSearch"/></td>
+                    <td><h:inputText id="searchKeyword" value="#{freelancerSearch.keywords}"/></td>
+                    <td><h:commandButton value="Keywords" 
+                                     action="freelancerTablesSearch"/></td>
+                    </ul> 
                 </h:form>
                 
                 <h:form>    
@@ -74,9 +77,7 @@
                     <tr>
                         <td>Job Description ID:</td>
                         <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}"/></td>
-                    </tr>
-                    <tr>
-                        <td> </td>
+                        <td></td>
                         <td><h:commandButton value="Submit application"
                                              action="#{jobApplicationBean.addJobApplicationFreelancer(userBean.id, jobDescriptionBean, userBean.type, userBean.userName)}" /></td>
                     </tr>
