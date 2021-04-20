@@ -9,7 +9,7 @@ package database;
  *
  * @author eleap
  */
-public class Freelancer {
+public class Freelancer implements Comparable<Freelancer>{
     
     private Integer id;
     private String name;
@@ -141,6 +141,10 @@ public class Freelancer {
      */
     public void setCanEdit(boolean canEdit) {
         this.canEdit = canEdit;
+    }
+    
+    public int compareTo(Freelancer o) {
+        return id - o.id;
     }
 
     /**

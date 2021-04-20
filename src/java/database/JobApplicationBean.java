@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  *
@@ -256,6 +257,44 @@ public class JobApplicationBean implements Serializable {
         return result;
     }
     
+    /**
+     * Return a list of Pending job applications with a given freelancer id
+     *
+     * @param id Id of job description to look for
+     * @return List containing all job applications with given description
+     */
+    public List<JobApplication> getPendingApplicationByFreelancerId(Integer id) {
+        ArrayList<JobApplication> result = new ArrayList<>();
+        // find all applications for a given job description and add to result
+        for (JobApplication a : applications) {
+            if (a.getFreelancerId().compareTo(id) == 0) {
+                if ("Pending".equals(a.getState())) {
+                    result.add(a);
+                }
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Return a list of Accepted job applications with a given freelancer id
+     *
+     * @param id Id of job description to look for
+     * @return List containing all job applications with given description
+     */
+    public List<JobApplication> getAcceptedApplicationByFreelancerId(Integer id) {
+        ArrayList<JobApplication> result = new ArrayList<>();
+        // find all applications for a given job description and add to result
+        for (JobApplication a : applications) {
+            if (a.getFreelancerId().compareTo(id) == 0) {
+                if ("Accepted".equals(a.getState())) {
+                    result.add(a);
+                }
+            }
+        }
+        return result;
+    }
+    
     public String acceptApplication(JobDescriptionBean jobDesc, String type, 
             String user, Integer userId) {
         Integer des_id = 0;
@@ -290,6 +329,15 @@ public class JobApplicationBean implements Serializable {
             }
         }
         return freeId;
+    }
+    
+    public TreeSet<Freelancer> showApplicantByProviderId(Integer id, FreelancerBean freBean) {
+        TreeSet<Freelancer> result = new TreeSet<>();
+        List<JobApplication> providerDesc = this.getJobApplicationByProviderId(id);
+        for (JobApplication a : providerDesc) {
+            result.add(freBean.getFreelancerById(a.getFreelancerId()));
+        }
+        return result;
     }
     
 }

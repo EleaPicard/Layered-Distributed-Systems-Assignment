@@ -16,6 +16,7 @@
                 </ul>
                 
                 <h:form>
+                    <h3>Applications for your jobs</h3>
                     <h:dataTable value="#{jobApplicationBean.getJobApplicationByProviderId(userBean.id)}" var="a"
                                  border='1' width='1000' cellpadding="5">
                         <h:column>
@@ -47,7 +48,7 @@
                 </h:form>
                 
                 <h:form>
-                   <br/>
+                <br/>
                 <h3>Accept application</h3>
                     <table>
                         <tr>
@@ -61,6 +62,33 @@
                                                  action="#{jobApplicationBean.acceptApplication(jobDescriptionBean,userBean.type,userBean.userName,userBean.id)}" /></td>
                         </tr>
                     </table> 
+                </h:form>
+                
+                <h:form>
+                    <h3>Freelancer profiles</h3>
+                    <h:dataTable value="#{jobApplicationBean.showApplicantByProviderId(userBean.id, freelancerBean)}" var="fre"
+                                 border='1' width='1000' cellpadding="5">
+                    <h:column>
+                            <f:facet name='header'>ID</f:facet>
+                            <h:outputText value="#{fre.id}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Name</f:facet>
+                            <h:outputText value="#{fre.name}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>List of skills</f:facet>
+                            <h:outputText value="#{fre.listOfSkills}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Message</f:facet>
+                            <h:outputText value="#{fre.message}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
                 
             </ui:define>
