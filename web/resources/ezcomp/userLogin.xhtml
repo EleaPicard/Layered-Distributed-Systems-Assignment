@@ -7,7 +7,7 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="loginPrompt"
-                      default="Please enter your name"/>
+                      default="Please enter your name: "/>
         <cc:attribute name="loginButtonText" default="Login"/>
         <cc:attribute name="logAction" 
                       method-signature="java.lang.String action()"/>
@@ -25,6 +25,12 @@
                              size="45"
                              value="#{cc.attrs.bean.userName}"
                              required="true"/>
+                <h:outputLabel for="name" 
+                               value="Password: "/>
+                <h:inputSecret id="password"
+                               size="45"
+                               value="#{cc.attrs.bean.password}"
+                               required="true"/>
             </h:panelGrid>
             <p>
                 <h:commandButton id="loginButton"
