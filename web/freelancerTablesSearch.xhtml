@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./templates/freelancerTemplate.xhtml">
+            <ui:define name="content">
+                <h1> Freelancer page</h1>
+                <h2>TODO</h2>
+                <ul>
+                    <li>Search by keyword</li>
+                    <li>Search by ID</li>
+                    <li>Offer to undertake a job</li>
+                    <li>Revoke an offer</li>
+                </ul>
+                
+                <h:form>
+                    <h:dataTable value="#{jobDescriptionBean.getAllOpenJobDescription()}" var="jobs"
+                         border='1' width='1000' cellpadding="5">
+                        <h:column>
+                            <f:facet name='header'>ID</f:facet>
+                            <h:outputText value="#{jobs.id}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Title</f:facet>
+                            <h:outputText value="#{jobs.title}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Keywords</f:facet>
+                            <h:outputText value="#{jobs.keywords}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Description</f:facet>
+                            <h:outputText value="#{jobs.description}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Payment offer</f:facet>
+                            <h:outputText value="#{jobs.paymentOffer}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>State</f:facet>
+                            <h:outputText value="#{jobs.state}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'>Provider Id</f:facet>
+                            <h:outputText value="#{jobs.providerId}"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                    </h:dataTable>
+                    <ul></ul>
+                    
+                    <ul>
+                    <h3>Search by:</h3>
+                    <td><h:inputText id="searchId" value="#{freelancerSearch.id}"/></td>
+                    <td><h:commandButton value="Id" 
+                                     action="freelancerTablesSearch"/></td>
+                    <td><h:inputText id="searchKeyword" value="#{freelancerSearch.keywords}"/></td>
+                    <td><h:commandButton value="Keywords" 
+                                     action="freelancerTablesSearch"/></td>
+                    </ul>
+                    
+                    <h:dataTable value="#{jobDescriptionBean.getOpenJobDescriptionById(freelancerSearch.id)}" 
+                                 var="jobs" border='0' width='1000' cellpadding="3" rendered='#{freelancerSearch.idNotEmpty()}'>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="Id: "/>
+                            <h:outputText value=" #{jobs.id}" 
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Title: "/>
+                            <h:outputText value=" #{jobs.title}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Keywords: "/>
+                            <h:outputText value=" #{jobs.keywords}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Description: "/>
+                            <h:outputText value=" #{jobs.description}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Payement offer: "/>
+                            <h:outputText value=" #{jobs.paymentOffer}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   State: "/>
+                            <h:outputText value=" #{jobs.state}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Provider Id: "/>
+                            <h:outputText value=" #{jobs.providerId}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h:dataTable value="#{jobDescriptionBean.getOpenJobDescriptionByKeyword(freelancerSearch.keywords)}" 
+                                 var="jobs" border='0' width='1000' cellpadding="3" rendered='#{freelancerSearch.keywordsNotEmpty()}'>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="Id: "/>
+                            <h:outputText value=" #{jobs.id}" 
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Title: "/>
+                            <h:outputText value=" #{jobs.title}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Keywords: "/>
+                            <h:outputText value=" #{jobs.keywords}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Description: "/>
+                            <h:outputText value=" #{jobs.description}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Payement offer: "/>
+                            <h:outputText value=" #{jobs.paymentOffer}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   State: "/>
+                            <h:outputText value=" #{jobs.state}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                        <h:column>
+                            <f:facet name='header'></f:facet>
+                            <h:outputText value="   Provider Id: "/>
+                            <h:outputText value=" #{jobs.providerId}"
+                                          style="font-style: italic"/>
+                            <f:facet name="footer"></f:facet>
+                        </h:column>
+                    </h:dataTable>
+                    
+                               
+                </h:form>
+                
+                <h:form>    
+                    <br/><br/>
+                    <h3>Apply for a Job</h3>
+                    <hr/>
+                    <table>
+                    <tr>
+                        <td>Job Description ID:</td>
+                        <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}"/></td>
+                        <td> </td>
+                        <td><h:commandButton value="Submit application"
+                                             action="#{jobApplicationBean.addJobApplicationFreelancer(userBean.id, jobDescriptionBean, userBean.type, userBean.userName)}" /></td>
+                    </tr>
+                    </table>
+                </h:form>
+                
+            </ui:define>
+            
+            <ui:define name="bottom">
+                <h:form>
+                    <h:commandButton value="Home" 
+                                     action="freelancerTables"/>
+                    <td> </td>
+                    <h:commandButton value="Manage my profile" 
+                                     action="freelancer_profile"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

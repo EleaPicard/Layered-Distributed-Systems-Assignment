@@ -239,8 +239,10 @@ public class JobDescriptionBean implements Serializable {
     public List<JobDescription> getOpenJobDescriptionByKeyword(String keyword) {
         ArrayList<JobDescription> result = new ArrayList<>();
         for (JobDescription j : jobs) {
+            String chaine = j.getKeywords();
+            int pos = chaine.indexOf(keyword);
             if ("Open".equals(j.getState()) 
-                    && keyword.equals(j.getKeywords())) {
+                    && (pos != -1)) {
                 result.add(j);
             }
         }
