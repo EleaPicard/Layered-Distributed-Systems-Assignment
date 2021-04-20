@@ -24,6 +24,7 @@ public class FreelancerBean implements Serializable {
     private String listOfSkills;
     private String message;
     private double paymentAccount;
+    private String password;
     
     /**
      * Creates a new instance of FreelancerBean
@@ -31,10 +32,10 @@ public class FreelancerBean implements Serializable {
     public FreelancerBean() {
         // add freelancer if list is empty
         if (fre.size() < 1) {
-            fre.add(new Freelancer(fre.size()+1,"Juan Martinez","Curious","hello world",20156));
-            fre.add(new Freelancer(fre.size()+1,"Lucas Gallagher","Ambitious","hello world",35201));
-            fre.add(new Freelancer(fre.size()+1,"Mike O'Shea","Rigorous","hello world",18568));
-            fre.add(new Freelancer(fre.size()+1,"Eoin O'Connel","Leadership","hello world",12560));
+            fre.add(new Freelancer(fre.size()+1,"Juan Martinez","Curious","hello world",20156,"$2a$12$h/ZmoMoWQMpPkRO820ul5efQwHKsJUHUix3wbAlziJ9I1MojZy3DS"));
+            fre.add(new Freelancer(fre.size()+1,"Lucas Gallagher","Ambitious","hello world",35201,"$2a$12$zxd5EJSv1dSvmFYWPNkisuzuhN3R9.3f/2R/zJGljDnd.tuJVHXvC"));
+            fre.add(new Freelancer(fre.size()+1,"Mike O'Shea","Rigorous","hello world",18568,"$2a$12$UEBi5Ao3Nf201sBcQaxZ4uXefvIWwYzl7r1F6fkiJ0sS0SI0m4//G"));
+            fre.add(new Freelancer(fre.size()+1,"Eoin O'Connel","Leadership","hello world",12560,"$2a$12$.yyFvssY0cGTnSqnkg9y2.cxJXSExncMNoPEsRzPeF.IXwTmqZnta"));
         }
     }
 
@@ -86,7 +87,7 @@ public class FreelancerBean implements Serializable {
      * from attributes
      */
     public void addFreelancer() {
-        fre.add(new Freelancer(fre.size()+1,name,listOfSkills,message,paymentAccount));
+        fre.add(new Freelancer(fre.size()+1,name,listOfSkills,message,paymentAccount,BCrypt.hashpw(password, BCrypt.gensalt(12))));
     }
 
     /**
@@ -202,6 +203,24 @@ public class FreelancerBean implements Serializable {
      */
     public void setPaymentAccount(double paymentAccount) {
         this.paymentAccount = paymentAccount;
+    }
+    
+    /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     public void payFreelancer(Integer freeId, double payment) {

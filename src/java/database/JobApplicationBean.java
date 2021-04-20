@@ -36,9 +36,9 @@ public class JobApplicationBean implements Serializable {
             applications.add(new JobApplication(
                     applications.size()+1,4,4,jobs.getJobDescriptionTitleById(4),2, fre.getFreelancerNameById(2), "Pending"));
             applications.add(new JobApplication(
-                    applications.size()+1,1,2,jobs.getJobDescriptionTitleById(1),3, fre.getFreelancerNameById(3), "Pending"));
+                    applications.size()+1,1,2,jobs.getJobDescriptionTitleById(2),3, fre.getFreelancerNameById(3), "Accepted"));
             applications.add(new JobApplication(
-                    applications.size()+1,3,1,jobs.getJobDescriptionTitleById(3),1, fre.getFreelancerNameById(1), "Pending"));
+                    applications.size()+1,3,1,jobs.getJobDescriptionTitleById(1),1, fre.getFreelancerNameById(1), "Pending"));
         }
     }
     

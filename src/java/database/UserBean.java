@@ -4,6 +4,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 @SessionScoped
 public class UserBean implements Serializable {
     private String userName;
+    private String password;
     private String type;
     private int id;
     
@@ -26,7 +29,7 @@ public class UserBean implements Serializable {
     /**
      * Retrieves user name
      *
-     * @return
+     * @return name of the user
      */
     public String getUserName() {
         return userName;
@@ -35,25 +38,43 @@ public class UserBean implements Serializable {
     /**
      * Set new user name
      *
-     * @param newUserName
+     * @param newUserName new name for the user
      */
     public void setUserName(String newUserName) {
         userName = newUserName;
     }
     
     /**
-     * Retrieves user type
+     * Retrieves password
      *
-     * @return
+     * @return password of the user
+     */
+    public String getPassword() {
+        return password;
+    }
+    
+    /**
+     * Set new user password
+     *
+     * @param newPassword new user password
+     */
+    public void setPassword(String newPassword) {
+        password = newPassword;
+    }
+    
+    /**
+     * Retrieves user type (administrator/provider/freelancer)
+     *
+     * @return type of the user 
      */
     public String getType() {
         return type;
     }
     
     /**
-     * Set a new type for the user
+     * Set a new type for the user (administrator/provider/freelancer)
      *
-     * @param newType
+     * @param newType new type for the user
      */
     public void setType(String newType) {
         type = newType;
@@ -62,7 +83,7 @@ public class UserBean implements Serializable {
     /**
      * Retrieves user ID
      *
-     * @return
+     * @return ID of the user
      */
     public int getId() {
         return id;
@@ -71,7 +92,7 @@ public class UserBean implements Serializable {
     /**
      * Set a new ID for the user
      *
-     * @param newId
+     * @param newId new user ID
      */
     public void setId(int newId) {
         id = newId;
@@ -96,9 +117,13 @@ public class UserBean implements Serializable {
         for (Administrator a : admins) {
             adminName = a.getName();
             if(userName.equals(adminName)) {
-                type = "Administrator";
-                id = a.getId();
-                break;
+                String adminPassword = a.getPassword();
+                boolean matched = BCrypt.checkpw(password, adminPassword);
+                if (matched) {
+                    type = "Administrator";
+                    id = a.getId();
+                    break;   
+                }
             }
         }
         
@@ -107,9 +132,13 @@ public class UserBean implements Serializable {
             for (Provider p : pro) {
                 providerName = p.getName();
                 if (userName.equals(providerName)) {
-                    type = "Provider";
-                    id = p.getId();
-                    break;
+                    String providerPassword = p.getPassword();
+                    boolean matched = BCrypt.checkpw(password, providerPassword);
+                    if (matched) {
+                        type = "Provider";
+                        id = p.getId();
+                        break;
+                    }
                 }
             }
         }
@@ -119,9 +148,13 @@ public class UserBean implements Serializable {
             for (Freelancer f : free) {
                 freelancerName = f.getName();
                 if (userName.equals(freelancerName)) {
-                    type = "Freelancer";
-                    id = f.getId();
-                    break;
+                    String freelancerPassword = f.getPassword();
+                    boolean matched = BCrypt.checkpw(password, freelancerPassword);
+                    if (matched) {
+                        type = "Freelancer";
+                        id = f.getId();
+                        break;
+                    }
                 }
             }
             if (!type.equals("Freelancer")) {
@@ -138,8 +171,9 @@ public class UserBean implements Serializable {
      * @return "logout" for HTML navigation
      */
     public String logout() {
-        userName="";
-        type="";
+        userName = "";
+        password = "";
+        type = "";
         id = 0;
         return "logout";
     }
