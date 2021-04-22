@@ -53,10 +53,8 @@
                     <table>
                         <tr>
                             <td>Job Application ID:</td>
-                            <td><h:inputText id="searchId" size="4" value="#{jobApplicationBean.applicationId}">
+                            <td><h:inputText id="searchId" size="4" value="#{jobApplicationBean.applicationId}" required="true">
                                     <f:validator validatorId="myvalidatorapplyid"/></h:inputText></td>
-                        </tr>
-                        <tr>
                             <td> </td>
                             <td><h:commandButton value="Submit application"
                                                  action="#{jobApplicationBean.acceptApplication(jobDescriptionBean,userBean.type,userBean.userName,userBean.id)}" /></td>
