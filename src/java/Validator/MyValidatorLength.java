@@ -16,7 +16,11 @@ public class MyValidatorLength implements Validator
 	public MyValidatorLength() {
 	}
 
-	@Override
+	/*
+         * Methode to validate if the keywords is not too long 
+         *
+         */
+        @Override
 	public void validate(FacesContext fc, UIComponent uic, Object obj)
 			throws ValidatorException {
 		String model = (String) obj;

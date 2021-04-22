@@ -19,7 +19,11 @@ public class MyValidatorIdApplication implements Validator
 	public MyValidatorIdApplication() {
 	}
 
-	@Override
+	/*
+         * Methode to validate if the id is in the list of job application 
+         *
+         */
+        @Override
 	public void validate(FacesContext fc, UIComponent uic, Object obj)
 			throws ValidatorException {
 		Integer applicationId = (Integer) obj;
