@@ -237,7 +237,9 @@ public class JobApplicationBean implements Serializable {
         // find all applications for a given job description and add to result
         for (JobApplication a : applications) {
             if (a.getProviderId().compareTo(id) == 0) {
-                result.add(a);
+                if (!"Rejected".equals(a.getState())) {
+                    result.add(a);
+                }
             }
         }
         return result;
@@ -323,10 +325,11 @@ public class JobApplicationBean implements Serializable {
             if ((app.getDescriptionId().compareTo(des_id) == 0)&& 
                     (app.getProviderId().compareTo(userId) == 0)) {
                 if ("Pending".equals(app.getState())) {
-                    applications.remove(app);
+                    app.setState("Rejected");
                 }
             }
         }
+        // Add a new entry in the log
         jobDesc.jobClosedProvider(a, type, user);
         return "providerTables";
     }
@@ -360,7 +363,9 @@ public class JobApplicationBean implements Serializable {
         TreeSet<Freelancer> result = new TreeSet<>();
         List<JobApplication> providerDesc = this.getJobApplicationByProviderId(id);
         for (JobApplication a : providerDesc) {
-            result.add(freBean.getFreelancerById(a.getFreelancerId()));
+            if (!"Rejected".equals(a.getState())) {
+                result.add(freBean.getFreelancerById(a.getFreelancerId()));
+            }
         }
         return result;
     }
