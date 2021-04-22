@@ -20,10 +20,9 @@ and open the template in the editor.
                 <h1>Sign in to the website</h1>
                 <div>
                 <ez:userLogin bean="#{userBean}"
-                              logAction="#{userBean.login}"/>
+                              logAction="#{userBean.login()}"/>
                 </div>
             </ui:define>
         </ui:composition>
     </h:body>
-    
 </html>
