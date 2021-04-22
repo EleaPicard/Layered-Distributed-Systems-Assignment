@@ -33,6 +33,8 @@ public class MyValidatorIdApplication implements Validator
                 for (JobApplication j : jobsAppliList) {
                     if (j.getApplicationId().compareTo(applicationId) == 0) {
                         valid = true;
+                    }else{
+                        valid = false;
                     }
                 }   
                 if (valid == false) {
