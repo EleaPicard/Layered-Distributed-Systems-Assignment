@@ -234,7 +234,7 @@ public class JobDescriptionBean implements Serializable {
      * Return a list of opened job description with corresponding keyword
      *
      * @param keyword Keyword of job description to look for
-     * @return list containing open job description with corresponding id
+     * @return list containing open job description with corresponding keyword
      */
     public List<JobDescription> getOpenJobDescriptionByKeyword(String keyword) {
         ArrayList<JobDescription> result = new ArrayList<>();
@@ -251,6 +251,12 @@ public class JobDescriptionBean implements Serializable {
         return result;
     }
     
+    /**
+     * Return a job description with corresponding id
+     *
+     * @param id Id of job description to look for
+     * @return a job description with corresponding id
+     */
     public JobDescription getJobDescriptionById(Integer id) {
         JobDescription result = new JobDescription();
         for (JobDescription j : jobs) {
@@ -261,6 +267,13 @@ public class JobDescriptionBean implements Serializable {
         return result;
     }
     
+    /**
+     * Method to complete a Job and pay the freelancer
+     * Values will be taken from attributes 
+     * @param j Job description
+     * @param appBean DataTable of JobApplication
+     * @param freeBean DataTable of Freelancer
+     */ 
     public void jobCompleted (JobDescription j, JobApplicationBean appBean, FreelancerBean freeBean) {
         j.setState("Completed");
         double payment = j.getPaymentOffer();
@@ -269,6 +282,13 @@ public class JobDescriptionBean implements Serializable {
         freeBean.payFreelancer(freeId, payment);
     }
     
+    /**
+     * Method to close a Job and add a log of the action
+     * Values will be taken from attributes 
+     * @param a Job application
+     * @param type Role of the person doing the action
+     * @param user Name of the person doing the action
+     */ 
     public void jobClosedProvider (JobApplication a, String type, String user) {
         for (JobDescription j : jobs) {
             if (j.getId().compareTo(a.getDescriptionId()) == 0) {
@@ -277,7 +297,13 @@ public class JobDescriptionBean implements Serializable {
             }
         }
     }
-    
+   
+    /**
+     * Method to add a log when a Job is undertaken
+     * Values will be taken from attributes 
+     * @param type Role of the person doing the action
+     * @param user Name of the person doing the action
+     */  
     public void undertakeJob (String type, String user) {
         logs.addLogUndertakeJob(type, user);
     }

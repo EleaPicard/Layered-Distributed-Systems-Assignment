@@ -115,7 +115,7 @@ public class FreelancerBean implements Serializable {
         }
     }
     
-        /**
+    /**
      * Get the value of the id
      *
      * @return the value of the id
@@ -223,6 +223,12 @@ public class FreelancerBean implements Serializable {
         this.password = password;
     }
     
+     /**
+     * Method to pay a freelancer
+     * Values will be taken from attributes 
+     * @param freeId Id of the freelancer
+     * @param payment Amount of the payment
+     */ 
     public void payFreelancer(Integer freeId, double payment) {
         for (Freelancer f : fre) {
             if (f.getId().compareTo(freeId) == 0) {

@@ -143,6 +143,11 @@ public class Freelancer implements Comparable<Freelancer>{
         this.canEdit = canEdit;
     }
     
+    /**
+     * Method to compare a freelancer
+     * Values will be taken from attributes 
+     * @param o Freelancer
+     */
     public int compareTo(Freelancer o) {
         return id - o.id;
     }

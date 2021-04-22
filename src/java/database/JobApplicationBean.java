@@ -29,6 +29,9 @@ public class JobApplicationBean implements Serializable {
     private String freelancerName;
     private String state;
 
+    /**
+     * Creates a new instance of JobApplicationBean
+     */
     public JobApplicationBean() {
         // add job application if list is empty
         if (applications.size() < 1) {
@@ -295,6 +298,15 @@ public class JobApplicationBean implements Serializable {
         return result;
     }
     
+   /**
+     * Method to accept an application
+     *
+     * @param jobDesc DataTable of job description 
+     * @param type Role of the user
+     * @param user Name of the user
+     * @param userId Id of the user
+     * @return the destination
+     */
     public String acceptApplication(JobDescriptionBean jobDesc, String type, 
             String user, Integer userId) {
         Integer des_id = 0;
@@ -319,6 +331,12 @@ public class JobApplicationBean implements Serializable {
         return "providerTables";
     }
     
+    /**
+     * Method to obtain a Freelancer from a description
+     *
+     * @param Id Id of the description
+     * @return Id of the freelancer
+     */
     public Integer getFreelancerFromDescription(Integer descId) {
         Integer freeId = 0;
         for (JobApplication a : applications) {
@@ -331,6 +349,13 @@ public class JobApplicationBean implements Serializable {
         return freeId;
     }
     
+    /**
+     * Method to show applicants by provider id
+     *
+     * @param freBean DataTable of freelancer 
+     * @param id Id of the provider
+     * @return the treeset of the applicants
+     */
     public TreeSet<Freelancer> showApplicantByProviderId(Integer id, FreelancerBean freBean) {
         TreeSet<Freelancer> result = new TreeSet<>();
         List<JobApplication> providerDesc = this.getJobApplicationByProviderId(id);
