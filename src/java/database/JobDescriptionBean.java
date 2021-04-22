@@ -283,11 +283,11 @@ public class JobDescriptionBean implements Serializable {
     }
     
     /**
-     * Method to close a Job
+     * Method to close a Job and add a log of the action
      * Values will be taken from attributes 
      * @param a Job application
-     * @param type DataTable of JobApplication
-     * @param user DataTable of Freelancer
+     * @param type Role of the person doing the action
+     * @param user Name of the person doing the action
      */ 
     public void jobClosedProvider (JobApplication a, String type, String user) {
         for (JobDescription j : jobs) {
@@ -297,7 +297,13 @@ public class JobDescriptionBean implements Serializable {
             }
         }
     }
-    
+   
+    /**
+     * Method to add a log when a Job is undertaken
+     * Values will be taken from attributes 
+     * @param type Role of the person doing the action
+     * @param user Name of the person doing the action
+     */  
     public void undertakeJob (String type, String user) {
         logs.addLogUndertakeJob(type, user);
     }
