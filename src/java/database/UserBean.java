@@ -1,11 +1,14 @@
 package database;
 
+import EntrepriseBeans.UserLogInRemote;
+
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.security.NoSuchAlgorithmException;
+import javax.ejb.EJB;
 
 /**
  *
@@ -14,6 +17,10 @@ import java.security.NoSuchAlgorithmException;
 @Named(value = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
+    
+    @EJB
+    private UserLogInRemote userLogIn;
+    
     private String userName;
     private String password;
     private String type;
@@ -24,6 +31,7 @@ public class UserBean implements Serializable {
      */
     public UserBean() {
         type = "";
+        id = 0;
     }
     
     /**
@@ -105,63 +113,14 @@ public class UserBean implements Serializable {
      * @return user type
      */
     public String login() {
-        AdministratorBean administrators = new AdministratorBean();
-        ProviderBean providers = new ProviderBean();
-        FreelancerBean freelancers = new FreelancerBean();
+        type = userLogIn.lookForType(userName, password);
         
-        ArrayList<Administrator> admins = administrators.getAllAdministrators();
-        ArrayList<Provider> pro = providers.getAllProviders();
-        ArrayList<Freelancer> free = freelancers.getAllFreelancers();
-        
-        String adminName;
-        for (Administrator a : admins) {
-            adminName = a.getName();
-            if(userName.equals(adminName)) {
-                String adminPassword = a.getPassword();
-                boolean matched = BCrypt.checkpw(password, adminPassword);
-                if (matched) {
-                    type = "Administrator";
-                    id = a.getId();
-                    break;   
-                }
-            }
+        if (!"error".equals(type)) {
+            id = userLogIn.lookForId(userName, type);
+        } else {
+            id = 0;
         }
         
-        if (!type.equals("Administrator")){
-            String providerName;
-            for (Provider p : pro) {
-                providerName = p.getName();
-                if (userName.equals(providerName)) {
-                    String providerPassword = p.getPassword();
-                    boolean matched = BCrypt.checkpw(password, providerPassword);
-                    if (matched) {
-                        type = "Provider";
-                        id = p.getId();
-                        break;
-                    }
-                }
-            }
-        }
-            
-        if (!type.equals("Administrator") && !type.equals("Provider")) {
-            String freelancerName;
-            for (Freelancer f : free) {
-                freelancerName = f.getName();
-                if (userName.equals(freelancerName)) {
-                    String freelancerPassword = f.getPassword();
-                    boolean matched = BCrypt.checkpw(password, freelancerPassword);
-                    if (matched) {
-                        type = "Freelancer";
-                        id = f.getId();
-                        break;
-                    }
-                }
-            }
-            if (!type.equals("Freelancer")) {
-                type = "error";
-                id = 0;
-            }
-        }
         return type;
     }
     
