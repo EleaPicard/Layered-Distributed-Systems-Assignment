@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ * Managed Bean Database for the Freelancers
  *
  * @author eleap
  */
@@ -32,10 +33,18 @@ public class FreelancerBean implements Serializable {
     public FreelancerBean() {
         // add freelancer if list is empty
         if (fre.size() < 1) {
-            fre.add(new Freelancer(fre.size()+1,"Juan Martinez","Curious","hello world",20156,"$2a$12$h/ZmoMoWQMpPkRO820ul5efQwHKsJUHUix3wbAlziJ9I1MojZy3DS"));
-            fre.add(new Freelancer(fre.size()+1,"Lucas Gallagher","Ambitious","hello world",35201,"$2a$12$zxd5EJSv1dSvmFYWPNkisuzuhN3R9.3f/2R/zJGljDnd.tuJVHXvC"));
-            fre.add(new Freelancer(fre.size()+1,"Mike O'Shea","Rigorous","hello world",18568,"$2a$12$UEBi5Ao3Nf201sBcQaxZ4uXefvIWwYzl7r1F6fkiJ0sS0SI0m4//G"));
-            fre.add(new Freelancer(fre.size()+1,"Eoin O'Connel","Leadership","hello world",12560,"$2a$12$.yyFvssY0cGTnSqnkg9y2.cxJXSExncMNoPEsRzPeF.IXwTmqZnta"));
+            fre.add(new Freelancer(fre.size()+1, "Juan Martinez", "Curious", 
+                    "hello world", 20156, 
+                    "$2a$12$h/ZmoMoWQMpPkRO820ul5efQwHKsJUHUix3wbAlziJ9I1MojZy3DS"));
+            fre.add(new Freelancer(fre.size()+1, "Lucas Gallagher", "Ambitious",
+                    "hello world", 35201, 
+                    "$2a$12$zxd5EJSv1dSvmFYWPNkisuzuhN3R9.3f/2R/zJGljDnd.tuJVHXvC"));
+            fre.add(new Freelancer(fre.size()+1, "Mike O'Shea", "Rigorous",
+                    "hello world", 18568,
+                    "$2a$12$UEBi5Ao3Nf201sBcQaxZ4uXefvIWwYzl7r1F6fkiJ0sS0SI0m4//G"));
+            fre.add(new Freelancer(fre.size()+1, "Eoin O'Connel", "Leadership",
+                    "hello world", 12560,
+                    "$2a$12$.yyFvssY0cGTnSqnkg9y2.cxJXSExncMNoPEsRzPeF.IXwTmqZnta"));
         }
     }
 
@@ -55,13 +64,17 @@ public class FreelancerBean implements Serializable {
      * @return List containing the freelancer
      */
     public Freelancer getFreelancerById(Integer id) {
+        // Create a new empty Freelancer instance
         Freelancer result = new Freelancer();
-        // find all job description with a given provider and add to result
+        // Go through all the Freelancers
         for (Freelancer f : fre) {
+            // If the ID is matching
             if (f.getId().compareTo(id) == 0) {
+                // the empty instance take the value of the Freelancer
                 result = f;
             }
         }
+        // Return the matching Freelancer
         return result;
     }
     
@@ -72,26 +85,32 @@ public class FreelancerBean implements Serializable {
      * @return Name of the freelancer
      */
     public String getFreelancerNameById(Integer id) {
-        String name ="";
-        // find all job description with a given provider and add to result
+        // Initialise an empty String
+        String freelancerName = "";
+        // Go through all the Freelancers
         for (Freelancer f : fre) {
+            // If the ID is matching
             if (f.getId().compareTo(id) == 0) {
-                name = f.getName();
+                // Retrieve the name of the matching freelancer
+                freelancerName = f.getName();
             }
         }
-        return name;
+        // Return the freelancer name
+        return freelancerName;
     }
     
     /**
-     * Method to add a new freelancer to the collection. values will be taken
-     * from attributes
+     * Method to add a new freelancer to the collection. 
+     * Values will be taken from attributes
      */
     public void addFreelancer() {
-        fre.add(new Freelancer(fre.size()+1,name,listOfSkills,message,paymentAccount,BCrypt.hashpw(password, BCrypt.gensalt(12))));
+        fre.add(new Freelancer(fre.size()+1, name, listOfSkills, message, 
+                paymentAccount, BCrypt.hashpw(password, BCrypt.gensalt(12))));
     }
 
     /**
      * Method to removes a freelancer from the collection
+     * 
      * @param f Freelancer to be removed
      */
     public void removeFreelancer(Freelancer f) {
@@ -100,6 +119,7 @@ public class FreelancerBean implements Serializable {
     
     /**
      * Enables editing of freelancer entries
+     * 
      * @param f freelancer for which to enable editing
      */
     public void editFreelancer(Freelancer f) {
@@ -110,24 +130,26 @@ public class FreelancerBean implements Serializable {
      * Disable editing for all freelancer entries.
      */
     public void saveFreelancer() {
+        // Go through all the freelancers
         for (Freelancer f : fre) {
+            // Disable editing for the current freelancer
             f.setCanEdit(false);
         }
     }
     
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of the id
+     * @param id new value of the ID
      */
     public void setId(Integer id) {
         this.id = id;
@@ -224,15 +246,20 @@ public class FreelancerBean implements Serializable {
     }
     
      /**
-     * Method to pay a freelancer
-     * Values will be taken from attributes 
+     * Method to pay a freelancer.
+     * Values will be taken from attributes
+     * 
      * @param freeId Id of the freelancer
      * @param payment Amount of the payment
      */ 
     public void payFreelancer(Integer freeId, double payment) {
+        // Go through all of the freelancer
         for (Freelancer f : fre) {
+            // If the ID is matching
             if (f.getId().compareTo(freeId) == 0) {
+                // Retrieve the current value of Payment Account
                 double current = f.getPaymentAccount();
+                // Update the Account with the payment for the completed job
                 f.setPaymentAccount(current + payment);
             }
         }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Managed Bean Database for Job Descriptions
  *
  * @author eleap
  */
@@ -71,6 +72,7 @@ public class JobDescriptionBean implements Serializable {
     /**
      * Method to add a new Job Description to the collection.
      * values will be taken from attributes and the user ID
+     * 
      * @param UserID
      */
     public void addJobDescriptionProvider(Integer UserID) {
@@ -81,6 +83,7 @@ public class JobDescriptionBean implements Serializable {
     
     /**
      * Method to removes a Job Description from the collection
+     * 
      * @param j Job Description to be removed
      */
     public void removeJobDescription(JobDescription j) {
@@ -94,13 +97,17 @@ public class JobDescriptionBean implements Serializable {
      * @return List containing all job description with given provider
      */
     public List<JobDescription> getJobDescriptionByProviderId(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
-        // find all job description with a given provider and add to result
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the provider ID is matching
             if (j.getProviderId().compareTo(id) == 0) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of jobs for a given provider
         return result;
     }
     
@@ -111,14 +118,17 @@ public class JobDescriptionBean implements Serializable {
      * @return Title of a job description with given provider
      */
     public String getJobDescriptionTitleById(Integer id) {
-        String title="";
-        // find all job description with a given provider
+        // Create an empty String that will retrieve the value of the job title
+        String jobTitle="";
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job ID is matching with the one in parameter
             if (j.getId().compareTo(id) == 0) {
-                title=j.getTitle();
+                // jobTitle take the title of the matching Job description
+                jobTitle=j.getTitle();
             }
         }
-        return title;
+        return jobTitle;
     }
     
     /**
@@ -130,14 +140,19 @@ public class JobDescriptionBean implements Serializable {
      */
     public List<JobDescription> 
         getNotCompletedJobDescriptionByProviderId(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
-        // find all job description with a given provider and add to result
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job is NOT marked as "Completed" 
+            // and has a matching provider ID
             if (j.getProviderId().compareTo(id) == 0 
                     && !"Completed".equals(j.getState())) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of not completed jobs for a given provider
         return result;
     }
         
@@ -149,14 +164,19 @@ public class JobDescriptionBean implements Serializable {
      * @return List containing all Open job description of given provider
      */
     public List<JobDescription> getOpenJobDescriptionByProviderId(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
-        // find all job description with a given provider and add to result
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job is marked as "Open" 
+            // and has a matching provider ID
             if (j.getProviderId().compareTo(id) == 0 
                     && "Open".equals(j.getState())) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of open jobs for a given provider
         return result;
     }
     
@@ -168,14 +188,19 @@ public class JobDescriptionBean implements Serializable {
      * @return List containing all Closed job description of given provider
      */
     public List<JobDescription> getClosedJobDescriptionByProviderId(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
-        // find all job description with a given provider and add to result
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job is marked as "Closed" 
+            // and has a matching provider ID
             if (j.getProviderId().compareTo(id) == 0 
                     && "Closed".equals(j.getState())) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of closed jobs for a given provider
         return result;
     }
         
@@ -188,14 +213,19 @@ public class JobDescriptionBean implements Serializable {
      */
     public List<JobDescription> 
         getCompletedJobDescriptionByProviderId(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
-        // find all job description with a given provider and add to result
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job is marked as "Completed" 
+            // and has a matching provider ID
             if (j.getProviderId().compareTo(id) == 0 
                     && "Completed".equals(j.getState())) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of completed jobs for a given provider
         return result;
     }
     
@@ -205,12 +235,17 @@ public class JobDescriptionBean implements Serializable {
      * @return List containing all open job description
      */
     public List<JobDescription> getAllOpenJobDescription() {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job is marked as "Open"
             if ("Open".equals(j.getState())) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // Return the list of opened jobs
         return result;
     }
     
@@ -221,12 +256,17 @@ public class JobDescriptionBean implements Serializable {
      * @return list containing open job description with corresponding id
      */
     public List<JobDescription> getOpenJobDescriptionById(Integer id) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If a job is marked as "Open" and has a matching id
             if ("Open".equals(j.getState()) && j.getId().compareTo(id) == 0) {
+                // Add the job to the list
                 result.add(j);
             }
         }
+        // return the list (Theorically, only one job should be on the list)
         return result;
     }
     
@@ -237,17 +277,24 @@ public class JobDescriptionBean implements Serializable {
      * @return list containing open job description with corresponding keyword
      */
     public List<JobDescription> getOpenJobDescriptionByKeyword(String keyword) {
+        // Create an empty list of job description
         ArrayList<JobDescription> result = new ArrayList<>();
+        // If a keyword has been entered by a user
         if (!"".equals(keyword)) {
+            // Go through all the job descriptions
             for (JobDescription j : jobs) {
                 String chaine = j.getKeywords();
                 int pos = chaine.indexOf(keyword);
+                // If a job in the database has the wanted keyword 
+                // and is marked as "Open"
                 if ("Open".equals(j.getState()) 
                         && (pos != -1)) {
+                    // Add the job description to the list of results
                     result.add(j);
                 }
             }
         }
+        // Return the list
         return result;
     }
     
@@ -258,9 +305,13 @@ public class JobDescriptionBean implements Serializable {
      * @return a job description with corresponding id
      */
     public JobDescription getJobDescriptionById(Integer id) {
+        // Create a new empty job description
         JobDescription result = new JobDescription();
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the id in parameter match with a job in the list
             if (j.getId().compareTo(id) == 0) {
+                // assign the job in the list to the created job description
                 result = j;
             }
         }
@@ -268,39 +319,53 @@ public class JobDescriptionBean implements Serializable {
     }
     
     /**
-     * Method to complete a Job and pay the freelancer
+     * Method to complete a Job and pay the freelancer.
      * Values will be taken from attributes 
+     * 
      * @param j Job description
      * @param appBean DataTable of JobApplication
      * @param freeBean DataTable of Freelancer
      */ 
-    public void jobCompleted (JobDescription j, JobApplicationBean appBean, FreelancerBean freeBean) {
+    public void jobCompleted (JobDescription j, JobApplicationBean appBean, 
+            FreelancerBean freeBean) {
+        // Set the job to "Completed"
         j.setState("Completed");
+        // Retrieve the values for payment in the job description
         double payment = j.getPaymentOffer();
+        // Retrieve the values for job ID in the job description
         Integer descId = j.getId();
+        // Find in the list of job application who is 
+        // the freelancer working on the job
         Integer freeId = appBean.getFreelancerFromDescription(descId);
+        // Call the method to pay the freelancer
         freeBean.payFreelancer(freeId, payment);
     }
     
     /**
-     * Method to close a Job and add a log of the action
+     * Method to close a Job and add a log of the action.
      * Values will be taken from attributes 
+     * 
      * @param a Job application
      * @param type Role of the person doing the action
      * @param user Name of the person doing the action
      */ 
     public void jobClosedProvider (JobApplication a, String type, String user) {
+        // Go through all the job descriptions
         for (JobDescription j : jobs) {
+            // If the job id in parameter match with a job in the list
             if (j.getId().compareTo(a.getDescriptionId()) == 0) {
+                // Mark the job as closed
                 j.setState("Closed");
+                // Add a log entry
                 logs.addLogJobClosed(type, user);
             }
         }
     }
    
     /**
-     * Method to add a log when a Job is undertaken
+     * Method to add a log when a Job is undertaken.
      * Values will be taken from attributes 
+     * 
      * @param type Role of the person doing the action
      * @param user Name of the person doing the action
      */  

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 /**
+ * Managed Bean Database for Job Applications
  *
  * @author vince
  */
@@ -36,13 +37,21 @@ public class JobApplicationBean implements Serializable {
         // add job application if list is empty
         if (applications.size() < 1) {
             applications.add(new JobApplication(
-                    applications.size()+1,4,4,jobs.getJobDescriptionTitleById(4),1, fre.getFreelancerNameById(1), "Pending"));
+                    applications.size()+1, 4, 4, 
+                    jobs.getJobDescriptionTitleById(4), 1, 
+                    fre.getFreelancerNameById(1), "Pending"));
             applications.add(new JobApplication(
-                    applications.size()+1,4,4,jobs.getJobDescriptionTitleById(4),2, fre.getFreelancerNameById(2), "Pending"));
+                    applications.size()+1, 4, 4, 
+                    jobs.getJobDescriptionTitleById(4), 2, 
+                    fre.getFreelancerNameById(2), "Pending"));
             applications.add(new JobApplication(
-                    applications.size()+1,1,2,jobs.getJobDescriptionTitleById(2),3, fre.getFreelancerNameById(3), "Accepted"));
+                    applications.size()+1, 1, 2, 
+                    jobs.getJobDescriptionTitleById(2), 3, 
+                    fre.getFreelancerNameById(3), "Accepted"));
             applications.add(new JobApplication(
-                    applications.size()+1,3,1,jobs.getJobDescriptionTitleById(1),1, fre.getFreelancerNameById(1), "Pending"));
+                    applications.size()+1, 3, 1, 
+                    jobs.getJobDescriptionTitleById(1), 1, 
+                    fre.getFreelancerNameById(1), "Pending"));
         }
     }
     
@@ -183,7 +192,7 @@ public class JobApplicationBean implements Serializable {
     /**
      * Set the state of a job application
      *
-     * @param state state of the application
+     * @param newState state of the application
      */
     public void setState(String newState) {
         this.state = newState;
@@ -203,23 +212,29 @@ public class JobApplicationBean implements Serializable {
     }
     
     /**
-     * Method to add a new Job Application to the collection.
-     * values will be taken from descriptionId attribute and the freelancer ID
+     * Method to add a new Job Application to the collection. 
+     * Values will be taken from descriptionId attribute and the freelancer ID
      * 
-     * @param userID
-     * @param jobs
+     * @param userID ID of the Freelancer applying for a job
+     * @param jobs Instance of the managedBean JobDescription
+     * @param type User type, either Admin, Provider or Freelancer 
+     * (the applicant is normally a Freelancer)
+     * @param userName Name of the user applying for a job
      */
-    public void addJobApplicationFreelancer(Integer userID, JobDescriptionBean jobs,
-            String type, String userName) {
+    public void addJobApplicationFreelancer(Integer userID, 
+            JobDescriptionBean jobs, String type, String userName) {
+        // Retrieve the job description the Freelancer is applying for
         JobDescription j = jobs.getJobDescriptionById(descriptionId);
+        // Create a new application for the job
         applications.add(new JobApplication(
                 applications.size()+1, j.getId(), descriptionId, j.getTitle(), userID, userName, "Pending"));
-        
+        // Call the method in JobDescriptionBean to add a new log entry
         jobs.undertakeJob(type, userName);
     }
     
     /**
      * Method to removes a Job Application from the collection
+     * 
      * @param a application to be removed
      */
     public void removeJobApplication(JobApplication a){
@@ -233,15 +248,20 @@ public class JobApplicationBean implements Serializable {
      * @return List containing all job applications with given description
      */
     public List<JobApplication> getJobApplicationByProviderId(Integer id) {
+        // Create an empty list of job application
         ArrayList<JobApplication> result = new ArrayList<>();
-        // find all applications for a given job description and add to result
+        // Go through all the job applications
         for (JobApplication a : applications) {
+            // If the Provider ID is matching
             if (a.getProviderId().compareTo(id) == 0) {
+                // If the application is NOT marked as "Rejected"
                 if (!"Rejected".equals(a.getState())) {
+                    // Add the application to the list
                     result.add(a);
                 }
             }
         }
+        // Return the list of all non rejected applications for a given provider
         return result;
     }
     
@@ -252,13 +272,17 @@ public class JobApplicationBean implements Serializable {
      * @return List containing all job applications with given description
      */
     public List<JobApplication> getJobApplicationByFreelancerId(Integer id) {
+        // Create an empty list of job application
         ArrayList<JobApplication> result = new ArrayList<>();
-        // find all applications for a given job description and add to result
+        // Go through all the job applications
         for (JobApplication a : applications) {
+            // If the Freelancer ID is matching
             if (a.getFreelancerId().compareTo(id) == 0) {
+                // Add the application to the list
                 result.add(a);
             }
         }
+        // Return the list of all applications for a given Freelancer
         return result;
     }
     
@@ -269,15 +293,20 @@ public class JobApplicationBean implements Serializable {
      * @return List containing all job applications with given description
      */
     public List<JobApplication> getPendingApplicationByFreelancerId(Integer id) {
+        // Create an empty list of job application
         ArrayList<JobApplication> result = new ArrayList<>();
-        // find all applications for a given job description and add to result
+        // Go through all the job applications
         for (JobApplication a : applications) {
+            // If the Freelancer ID is matching
             if (a.getFreelancerId().compareTo(id) == 0) {
+                // If the application is marked as "Pending"
                 if ("Pending".equals(a.getState())) {
+                    // Add the application to the list
                     result.add(a);
                 }
             }
         }
+        // Return the list of all pending applications for a given Freelancer
         return result;
     }
     
@@ -288,15 +317,20 @@ public class JobApplicationBean implements Serializable {
      * @return List containing all job applications with given description
      */
     public List<JobApplication> getAcceptedApplicationByFreelancerId(Integer id) {
+        // Create an empty list of job application
         ArrayList<JobApplication> result = new ArrayList<>();
-        // find all applications for a given job description and add to result
+        // Go through all the job applications
         for (JobApplication a : applications) {
+            // If the Freelancer ID is matching
             if (a.getFreelancerId().compareTo(id) == 0) {
+                // If the application is marked as "Accepted"
                 if ("Accepted".equals(a.getState())) {
+                    // Add the application to the list
                     result.add(a);
                 }
             }
         }
+        // Return the list of all accepted applications for a given Freelancer
         return result;
     }
     
@@ -311,19 +345,29 @@ public class JobApplicationBean implements Serializable {
      */
     public String acceptApplication(JobDescriptionBean jobDesc, String type, 
             String user, Integer userId) {
+        // Initialise an Integer
         Integer des_id = 0;
+        // Create an empty job application
         JobApplication a = new JobApplication();
+        // Go through all the job applications
         for (JobApplication app : applications) {
+            // If the application ID and the ID of the provider are matching
             if ((app.getApplicationId().compareTo(applicationId) == 0)&& 
                     (app.getProviderId().compareTo(userId) == 0)) {
+                // Set the application as "Accepted"
                 app.setState("Accepted");
+                // Retrieve the ID of the job description in the application
                 des_id = app.getDescriptionId();
+                // The empty job application copy the matching application
                 a = new JobApplication(app);
             }
         }
+        // Go through all the job applications, again
         for (JobApplication app : applications) {
+            // Find the other applications for the job
             if ((app.getDescriptionId().compareTo(des_id) == 0)&& 
                     (app.getProviderId().compareTo(userId) == 0)) {
+                // Set applications that have not been accepted to "Rejected"
                 if ("Pending".equals(app.getState())) {
                     app.setState("Rejected");
                 }
@@ -331,24 +375,33 @@ public class JobApplicationBean implements Serializable {
         }
         // Add a new entry in the log
         jobDesc.jobClosedProvider(a, type, user);
+        
+        // Return value used for HTML navigation
         return "providerTables";
     }
     
     /**
      * Method to obtain a Freelancer from a description
      *
-     * @param Id Id of the description
+     * @param descId Id of the description
      * @return Id of the freelancer
      */
     public Integer getFreelancerFromDescription(Integer descId) {
+        // Initialise an Integer
         Integer freeId = 0;
+        // Go through all the job applications
         for (JobApplication a : applications) {
+            // If the job description ID of the application is matching
             if (a.getDescriptionId().compareTo(descId) == 0) {
+                // If the application is marked as "Accepted"
                 if("Accepted".equals(a.getState())) {
+                    // Retrieve the ID of the freelancer that 
+                    // has been accepted for the job
                     freeId = a.getFreelancerId();
                 }
             }
         }
+        // Return the freelancer ID
         return freeId;
     }
     
@@ -357,16 +410,26 @@ public class JobApplicationBean implements Serializable {
      *
      * @param freBean DataTable of freelancer 
      * @param id Id of the provider
-     * @return the treeset of the applicants
+     * @return the tree set of the applicants
      */
-    public TreeSet<Freelancer> showApplicantByProviderId(Integer id, FreelancerBean freBean) {
+    public TreeSet<Freelancer> showApplicantByProviderId(Integer id, 
+            FreelancerBean freBean) {
+        // Create an empty TreeSet of Freelancer
+        // TreeSet have the advantage of avoiding duplicates and 
+        // keeping the objects inside in order
         TreeSet<Freelancer> result = new TreeSet<>();
-        List<JobApplication> providerDesc = this.getJobApplicationByProviderId(id);
+        // Get the list of job applications for a given provider ID
+        List<JobApplication> providerDesc = 
+                this.getJobApplicationByProviderId(id);
+        // Go through all the applications for the provider
         for (JobApplication a : providerDesc) {
+            // If the application is not rejected
             if (!"Rejected".equals(a.getState())) {
+                // Add the application to the TreeSet
                 result.add(freBean.getFreelancerById(a.getFreelancerId()));
             }
         }
+        // Return the TreeSet of not rejected applications for a given provider
         return result;
     }
     

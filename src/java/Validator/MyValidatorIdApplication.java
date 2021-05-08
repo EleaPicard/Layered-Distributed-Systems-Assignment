@@ -7,61 +7,72 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.*;
- 
+
+/**
+ * Validator for job application ID research 
+ *
+ * @author eleap
+ */
 @FacesValidator("myvalidatorapplyid")
-public class MyValidatorIdApplication implements Validator
-{
-        JobApplicationBean appli = new JobApplicationBean();
-        ArrayList<JobApplication> jobsAppliList = appli.getAllJobApplications();
-    
-        private String searchId;
+public class MyValidatorIdApplication implements Validator {
 
-	public MyValidatorIdApplication() {
-	}
+    JobApplicationBean appli = new JobApplicationBean();
+    ArrayList<JobApplication> jobsAppliList = appli.getAllJobApplications();
 
-	/*
-         * Methode to validate if the id is in the list of job application 
-         *
-         */
-        @Override
-	public void validate(FacesContext fc, UIComponent uic, Object obj)
-			throws ValidatorException {
-		Integer applicationId = (Integer) obj;
-                boolean valid = false;
+    private String searchId;
 
-                //Check if the id is in the job decription
-                for (JobApplication j : jobsAppliList) {
-                    if (j.getApplicationId().compareTo(applicationId) == 0) {
-                        valid = true;
-                    }else{
-                        valid = false;
-                    }
-                }   
-                if (valid == false) {
-			FacesMessage msg = new FacesMessage(
-					" This job application Id is not in the list. "
-                                                + "Please enter an other Id.");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			throw new ValidatorException(msg);
-		}
+    /**
+     * Default Constructor
+     */
+    public MyValidatorIdApplication() {
+    }
 
-	}
-        
-        /**
-         * Get the value of search Id
-         *
-         * @return the value search Id
-         */
-        public String getSearchId() {
-		return searchId;
-	}
+    /*
+     * Method to validate if the id is in the list of job application 
+     */
+    @Override
+    public void validate(FacesContext fc, UIComponent uic, Object obj)
+            throws ValidatorException {
+        Integer applicationId = (Integer) obj;
+        boolean valid = false;
 
-        /**
-         * Set the value of search Id
-         *
-         * @param searchId new value of the search Id
-         */
-	public void setSearchId(String searchId) {
-		this.searchId = searchId;
-	}
+        // Check if the ID is in the job applications
+        for (JobApplication j : jobsAppliList) {
+            if (j.getApplicationId().compareTo(applicationId) == 0) {
+                valid = true;
+            } else {
+                valid = false;
+            }
+        }
+        // If the ID is not in the job applications
+        if (valid == false) {
+            // Create an error message
+            FacesMessage msg = new FacesMessage(
+                    " This job application Id is not in the list. "
+                    + "Please enter an other Id.");
+            // Set the severity of the message
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            // Throw a validator exception with the message
+            throw new ValidatorException(msg);
+        }
+
+    }
+
+    /**
+     * Get the value of search ID
+     *
+     * @return the value search ID
+     */
+    public String getSearchId() {
+        return searchId;
+    }
+
+    /**
+     * Set the value of search ID
+     *
+     * @param searchId new value of the search ID
+     */
+    public void setSearchId(String searchId) {
+        this.searchId = searchId;
+    }
 }

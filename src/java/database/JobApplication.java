@@ -1,6 +1,7 @@
 package database;
 
 /**
+ * Entity Class for Job Applications
  *
  * @author vince
  */
@@ -19,7 +20,9 @@ public class JobApplication {
      * @param applicationId unique application ID
      * @param providerId ID of the provider
      * @param descriptionId ID of the job description
+     * @param descriptionTitle Title of the job description
      * @param freelancerId ID of the freelancer
+     * @param freelancerName Name of the freelancer 
      * @param state state of the application
      */
     public JobApplication(Integer applicationId, Integer providerId, 
@@ -34,9 +37,17 @@ public class JobApplication {
         this.state = state;
     }
     
+    /**
+     * Default constructor
+     */
     public JobApplication() {
     }
     
+    /**
+     * Copy constructor
+     *
+     * @param o JobApplication object to copy
+     */
     public JobApplication(JobApplication o) {
         this.applicationId = o.getApplicationId();
         this.providerId = o.getProviderId();
@@ -103,8 +114,8 @@ public class JobApplication {
     }
     
     /**
-     * Get the state of a Job Application
-     * either "Accepted" or "Pending"
+     * Get the state of a Job Application.
+     * Either "Accepted", "Pending" or "Rejected"
      *
      * @return String of a application state
      */
@@ -172,8 +183,8 @@ public class JobApplication {
     }
     
     /**
-     * Set the state of a Job Application
-     * either "Accepted" or "Pending"
+     * Set the state of a Job Application.
+     * Either "Accepted", "Pending" or "Rejected"
      *
      * @param newState new state of an application
      */

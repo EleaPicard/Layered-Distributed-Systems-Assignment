@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ * Managed Bean Database for the Administrators
  *
  * @author eleap
  */
@@ -29,10 +30,14 @@ public class AdministratorBean implements Serializable {
     public AdministratorBean() {
         // add administrator if list is empty
         if (adm.size() < 1) {
-            adm.add(new Administrator(adm.size()+1,"Anna Murphy", "$2a$12$8mkMLKSlW48jTtpVGejUvuAu3DOl80c6eDeCsuTd6ANZy5nhW7rdO"));
-            adm.add(new Administrator(adm.size()+1,"Tom Holly", "$2a$12$QqvXBis2Nc6GkLnMHqBDveT3X4EBv8xaXX7llQVZ38K1GRgCoBazG"));
-            adm.add(new Administrator(adm.size()+1,"Peter Smitt", "$2a$12$SIz3Xavkg24vekNeUuArheEK5HZTxTvOjl9Wcb3opUb99Y0wtSltO"));
-            adm.add(new Administrator(adm.size()+1,"Carola Alvez", "$2a$12$u3MQ.r6TMZtyXQK2ydItduDEReQz8WL.e5RDxmIzvaTI7RlJbc10i"));
+            adm.add(new Administrator(adm.size()+1, "Anna Murphy", 
+                    "$2a$12$8mkMLKSlW48jTtpVGejUvuAu3DOl80c6eDeCsuTd6ANZy5nhW7rdO"));
+            adm.add(new Administrator(adm.size()+1, "Tom Holly", 
+                    "$2a$12$QqvXBis2Nc6GkLnMHqBDveT3X4EBv8xaXX7llQVZ38K1GRgCoBazG"));
+            adm.add(new Administrator(adm.size()+1, "Peter Smitt", 
+                    "$2a$12$SIz3Xavkg24vekNeUuArheEK5HZTxTvOjl9Wcb3opUb99Y0wtSltO"));
+            adm.add(new Administrator(adm.size()+1, "Carola Alvez", 
+                    "$2a$12$u3MQ.r6TMZtyXQK2ydItduDEReQz8WL.e5RDxmIzvaTI7RlJbc10i"));
         }
     }
     
@@ -47,14 +52,16 @@ public class AdministratorBean implements Serializable {
     
     /**
      * Method to add a new administrator to the collection. 
-     * values will be taken from attributes
+     * Values will be taken from attributes
      */
     public void addAdministrator() {
-        adm.add(new Administrator(adm.size()+1,name, password));
+        adm.add(new Administrator(adm.size()+1, name, 
+                BCrypt.hashpw(password, BCrypt.gensalt(12))));
     }
 
     /**
      * Method to removes an administrator from the collection
+     * 
      * @param a Administrator to be removed
      */
     public void removeAdministrator(Administrator a) {
@@ -62,18 +69,18 @@ public class AdministratorBean implements Serializable {
     }
 
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of id
+     * @param id new value of ID
      */
     public void setId(Integer id) {
         this.id = id;

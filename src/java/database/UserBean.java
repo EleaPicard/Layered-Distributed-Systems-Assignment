@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 
 /**
+ * Managed Bean for User Connection to the website
  *
  * @author Vincent Sifferlen
  */
@@ -25,6 +26,9 @@ public class UserBean implements Serializable {
     private String password;
     private String type;
     private int id;
+    
+    LogBean logs = new LogBean();
+    ArrayList<Log> logsList = logs.getAllLogs();
     
     /**
      * Default constructor.
@@ -71,7 +75,7 @@ public class UserBean implements Serializable {
     }
     
     /**
-     * Retrieves user type (administrator/provider/freelancer)
+     * Retrieves user type (Administrator/Provider/Freelancer).
      *
      * @return type of the user 
      */
@@ -80,7 +84,7 @@ public class UserBean implements Serializable {
     }
     
     /**
-     * Set a new type for the user (administrator/provider/freelancer)
+     * Set a new type for the user (Administrator/Provider/Freelancer).
      *
      * @param newType new type for the user
      */
@@ -107,33 +111,48 @@ public class UserBean implements Serializable {
     }
     
     /**
-     * Find the matching user in the data tables and retrieve its ID and type
-     * either administrator, job provider or freelancer
+     * Find the matching user in the data tables and retrieve its ID and type.
+     * Either administrator, job provider or freelancer
      *
      * @return user type
      */
     public String login() {
+        // Call EJB for log in method
         type = userLogIn.lookForType(userName, password);
         
+        // If both the user name and the password are correct
         if (!"error".equals(type)) {
+            // Call the EJB method to retrieve user ID
             id = userLogIn.lookForId(userName, type);
-        } else {
+            // Add a log entry for the connection
+            logs.addLogConnection(type, userName);
+        } else {  // If either user name or password are wrong
+            // Dummy value for user ID
             id = 0;
+            // Add a log entry for the failed connection
+            logs.addLogConnectionError(userName);
         }
         
+        // Return user type for HTML navigation to appropriated web page
         return type;
     }
     
     /**
-     * reset userName and type for log out
+     * Reset userName and type for log out
      *
      * @return "logout" for HTML navigation
      */
     public String logout() {
+        // Add a new log entry for the deconnection
+        logs.addLogDeconnection(type, userName);
+        
+        // Remove user's data from the bean
         userName = "";
         password = "";
         type = "";
         id = 0;
+        
+        // return value used for navigation
         return "logout";
     }
 }

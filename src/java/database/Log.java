@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
+ * Entity Class for Logs
  *
  * @author eleap
  */
@@ -104,7 +105,8 @@ public class Log {
      */
     public Log(String actioner,String actionerName, String action) {
         LocalDateTime datetime1 = LocalDateTime.now();  
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(
+                "dd-MM-yyyy HH:mm:ss");
         this.dateTime = datetime1.format(format);
         this.actioner = actioner;
         this.actionerName = actionerName;

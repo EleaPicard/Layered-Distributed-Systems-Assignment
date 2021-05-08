@@ -6,6 +6,7 @@
 package database;
 
 /**
+ * Entity Class for the Administrators
  *
  * @author eleap
  */
@@ -16,18 +17,18 @@ public class Administrator {
     private String password;
 
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of the id
+     * @param id new value of the ID
      */
     public void setId(Integer id) {
         this.id = id;

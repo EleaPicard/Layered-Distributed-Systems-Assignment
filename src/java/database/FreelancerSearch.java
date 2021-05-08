@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
 /**
+ * Managed Bean for the job search by ID and by Keywords for the Freelancers
  *
  * @author eleap
  */
@@ -20,18 +21,18 @@ public class FreelancerSearch {
     private String keywords;
 
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of the id
+     * @param id new value of the ID
      */
     public void setId(Integer id) {
         this.id = id;
@@ -64,21 +65,25 @@ public class FreelancerSearch {
     
     /**
      * Method to verify if the id is not empty
-     * 
      */ 
     public boolean idNotEmpty() {
+        // Initialise a boolean to "true"
         boolean returnvalue = true;
+        // If the ID is "empty", set the boolean to "false"
         if (id == null) returnvalue=false;
+        // Return the boolean
         return returnvalue;
     }
     
     /**
      * Method to verify if the keywords is not empty
-     * 
      */ 
     public boolean keywordsNotEmpty() {
+        // Initialise a boolean to "true"
         boolean returnvalue = true;
+        // If the keyword is null or an empty Sring, set the boolean to "false"
         if (keywords == null || keywords =="") returnvalue=false;
+        // Return the boolean
         return returnvalue;
     }
 }

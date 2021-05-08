@@ -4,7 +4,7 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-    
+    <!-- Navigation rules for when a user is connecting to the website -->
     <navigation-rule>
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
@@ -25,6 +25,7 @@
         </navigation-case>
     </navigation-rule>
     
+    <!-- Navigation rules for when a user is disconnecting from the website -->
     <navigation-rule>
         <!-- omit from view id: all page -->
         <navigation-case>

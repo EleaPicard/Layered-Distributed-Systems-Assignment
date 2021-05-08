@@ -6,6 +6,7 @@
 package database;
 
 /**
+ * Entity Class for Job Descriptions
  *
  * @author eleap
  */
@@ -157,7 +158,8 @@ public class JobDescription {
      * @param providerId job provider ID 
      */
     public JobDescription(Integer id, String title, String keywords, 
-            String description, double paymentOffer, String state, Integer providerId) {
+            String description, double paymentOffer, 
+            String state, Integer providerId) {
         this.id = id;
         this.title = title;
         this.keywords = keywords;

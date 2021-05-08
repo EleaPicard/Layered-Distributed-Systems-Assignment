@@ -6,6 +6,7 @@
 package database;
 
 /**
+ * Entity Class for the Freelancers
  *
  * @author eleap
  */
@@ -20,18 +21,18 @@ public class Freelancer implements Comparable<Freelancer>{
     private boolean canEdit;
 
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of the id
+     * @param id new value of the ID
      */
     public void setId(Integer id) {
         this.id = id;
@@ -129,6 +130,7 @@ public class Freelancer implements Comparable<Freelancer>{
 
     /**
      * Accessor for isEdit
+     * 
      * @return value of canEdit
      */
     public boolean isCanEdit() {
@@ -137,6 +139,7 @@ public class Freelancer implements Comparable<Freelancer>{
 
     /**
      * Mutator for canEdit
+     * 
      * @param canEdit false indicates this object cannot be edited
      */
     public void setCanEdit(boolean canEdit) {
@@ -144,10 +147,12 @@ public class Freelancer implements Comparable<Freelancer>{
     }
     
     /**
-     * Method to compare a freelancer
-     * Values will be taken from attributes 
+     * Method to compare a freelancer.
+     * Values will be taken from attributes
+     * 
      * @param o Freelancer
      */
+    @Override
     public int compareTo(Freelancer o) {
         return id - o.id;
     }
@@ -161,9 +166,9 @@ public class Freelancer implements Comparable<Freelancer>{
      * @param message message of the freelancer
      * @param paymentAccount amount in the payment account of the freelancer 
      * @param password Password of the freelancer
-     * @param canEdit indicates if this object can be edited
      */
-    public Freelancer(Integer id, String name, String listOfSkills, String message, double paymentAccount, String password) {
+    public Freelancer(Integer id, String name, String listOfSkills, 
+            String message, double paymentAccount, String password) {
         this.id = id;
         this.name = name;
         this.listOfSkills = listOfSkills;

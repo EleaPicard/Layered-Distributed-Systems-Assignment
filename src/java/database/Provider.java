@@ -6,6 +6,7 @@
 package database;
 
 /**
+ * Entity Class for Providers
  *
  * @author eleap
  */
@@ -17,18 +18,18 @@ public class Provider {
 
 
     /**
-     * Get the value of the id
+     * Get the value of the ID
      *
-     * @return the value of the id
+     * @return the value of the ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * Set the value of the id
+     * Set the value of the ID
      *
-     * @param id new value of id
+     * @param id new value of ID
      */
     public void setId(Integer id) {
         this.id = id;

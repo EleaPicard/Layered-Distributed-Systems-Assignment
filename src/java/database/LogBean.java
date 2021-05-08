@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
+ * Managed Bean Database for Logs
  *
  * @author eleap
  */
@@ -31,9 +32,12 @@ public class LogBean implements Serializable {
     public LogBean() {
         // add log if list is empty
         if (logs.size() < 1) {
-            logs.add(new Log("Provider","Tom Gallagher","Has accepted a freelancer"));
-            logs.add(new Log("Freelancer","Juan Martinez","Has offer to undertake a job"));
-            logs.add(new Log("Provider","Sean Conway","Has marked a job as closed"));
+            logs.add(new Log("Provider","Tom Gallagher",
+                    "Has accepted a freelancer"));
+            logs.add(new Log("Freelancer","Juan Martinez",
+                    "Has offer to undertake a job"));
+            logs.add(new Log("Provider","Sean Conway",
+                    "Has marked a job as closed"));
         }
     }
     
@@ -47,8 +51,8 @@ public class LogBean implements Serializable {
     }
     
     /**
-     * Method to add a new log to the collection. values will be taken
-     * from attributes
+     * Method to add a new log to the collection. 
+     * Values will be taken from attributes
      */
     public void addLog() {
         logs.add(new Log(actioner, actionerName, action));
@@ -56,6 +60,7 @@ public class LogBean implements Serializable {
 
     /**
      * Method to removes a log from the collection
+     * 
      * @param l Log to be removed
      */
     public void removeLog(Log l) {
@@ -121,6 +126,10 @@ public class LogBean implements Serializable {
     /**
      * Method to add a new log to the collection when a job is closed.
      * Values will be taken from attributes
+     * 
+     * @param type Value representing if the user is an admin, a provider 
+     * or a freelancer
+     * @param actionerName Name of the user
      */
     public void addLogJobClosed(String type, String actionerName) {
         logs.add(new Log(type, actionerName, "Has marked a job as closed "
@@ -130,9 +139,46 @@ public class LogBean implements Serializable {
     /**
      * Method to add a new log to the collection when a job is closed.
      * Values will be taken from attributes
+     * 
+     * @param type Value representing if the user is an admin, a provider 
+     * or a freelancer
+     * @param actionerName Name of the user
      */
     public void addLogUndertakeJob(String type, String actionerName) {
         logs.add(new Log(type, actionerName, "Has offer to undertake a job"));
+    }
+    
+    /**
+     * Method to add a new log to the collection when a user is Signing int.
+     *
+     * @param type Value representing if the user is an admin, a provider 
+     * or a freelancer
+     * @param actionerName Name of the user
+     */
+    public void addLogConnection(String type, String actionerName) {
+        logs.add(new Log(type, actionerName, "Connected to the website"));
+    }
+    
+    /**
+     * Method to add a new log to the collection when a user is unsuccessful 
+     * while trying to connect to the website.
+     *
+     * @param actionerName Name of the user
+     */
+    public void addLogConnectionError(String actionerName) {
+        logs.add(new Log("Unrecognised user", actionerName, "Tried to connect "
+                + "to the website"));
+    }
+    
+    /**
+     * Method to add a new log to the collection when a user is Signing out.
+     *
+     * @param type Value representing if the user is an admin, a provider 
+     * or a freelancer
+     * @param actionerName Name of the user
+     */
+    public void addLogDeconnection(String type, String actionerName) {
+        logs.add(new Log(type, actionerName, "Disconnected"));
     }
 
 }
