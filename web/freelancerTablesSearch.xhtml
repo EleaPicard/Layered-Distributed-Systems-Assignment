@@ -11,7 +11,6 @@
         <ui:composition template="./templates/freelancerTemplate.xhtml">
             <ui:define name="content">
                 <h1> Freelancer page</h1>
-                <h2>TODO</h2>
                 
                 <h:form>
                     <h:dataTable value="#{jobDescriptionBean.getAllOpenJobDescription()}" var="jobs"
@@ -180,7 +179,8 @@
                     <table>
                     <tr>
                         <td>Job Description ID:</td>
-                        <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}" required="true"/></td>
+                        <td><h:inputText size="4" value="#{jobApplicationBean.descriptionId}" required="true">
+                                <f:validator validatorId="myvalidatorapply"/></h:inputText></td>
                         <td> </td>
                         <td><h:commandButton value="Submit application"
                                              action="#{jobApplicationBean.addJobApplicationFreelancer(userBean.id, jobDescriptionBean, userBean.type, userBean.userName)}" /></td>
