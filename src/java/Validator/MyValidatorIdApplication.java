@@ -39,9 +39,8 @@ public class MyValidatorIdApplication implements Validator {
         // Check if the ID is in the job applications
         for (JobApplication j : jobsAppliList) {
             if (j.getApplicationId().compareTo(applicationId) == 0) {
-                valid = true;
-            } else {
-                valid = false;
+                if ("Pending".equals(j.getState()))
+                    valid = true;
             }
         }
         // If the ID is not in the job applications
