@@ -32,11 +32,17 @@ public class LogBean implements Serializable {
     public LogBean() {
         // add log if list is empty
         if (logs.size() < 1) {
-            logs.add(new Log("Provider","Tom Gallagher",
-                    "Has accepted a freelancer"));
+            logs.add(new Log("Freelancer","Lucas Gallagher",
+                    "Has offer to undertake a job"));
+            logs.add(new Log("Freelancer","Mike O'Shea",
+                    "Has offer to undertake a job"));
             logs.add(new Log("Freelancer","Juan Martinez",
                     "Has offer to undertake a job"));
-            logs.add(new Log("Provider","Sean Conway",
+            logs.add(new Log("Freelancer","Juan Martinez",
+                    "Has offer to undertake a job"));
+            logs.add(new Log("Provider","Tom Murphy",
+                    "Has accepted a freelancer"));
+            logs.add(new Log("Provider","Tom Murphy",
                     "Has marked a job as closed"));
         }
     }
