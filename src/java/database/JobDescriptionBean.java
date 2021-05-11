@@ -48,6 +48,8 @@ public class JobDescriptionBean implements Serializable {
                     "",23000,"Open",4));
             jobs.add(new JobDescription(jobs.size()+1,"Senior HR","HR",
                     "",25450,"Open",4));
+            jobs.add(new JobDescription(jobs.size()+1,"Technician","Electronic",
+                    "",18000,"Open",2));
         }
     }
     
@@ -66,7 +68,7 @@ public class JobDescriptionBean implements Serializable {
      */
     public void addJobDescription() {
         jobs.add(new JobDescription(jobs.size()+1,title,keywords,description,
-                paymentOffer,state,providerId));
+                paymentOffer,"Open",providerId));
     }
     
     /**

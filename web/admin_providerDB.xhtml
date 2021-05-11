@@ -32,17 +32,19 @@
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
+                </h:form>
                 <br/><br/>
+            <h:form>
             <h3>Add Provider</h3>
             <hr/>
             <table>
             <tr>
                 <td>Name:</td>
-                <td><h:inputText size="20" value="#{providerBean.name}" /></td>
+                <td><h:inputText size="20" value="#{providerBean.name}" required="true"/></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><h:inputText size="20" value="#{providerBean.password}" /></td>
+                <td><h:inputText size="20" value="#{providerBean.password}" required="true"/></td>
             </tr>
             <tr>
                 <td> </td>

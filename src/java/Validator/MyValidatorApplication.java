@@ -40,8 +40,6 @@ public class MyValidatorApplication implements Validator {
         for (JobDescription d : descList) {
             if (d.getId().compareTo(applicationId) == 0) {
                 valid = true;
-            } else {
-                valid = false;
             }
         }
         // If the ID is not in the job applications
