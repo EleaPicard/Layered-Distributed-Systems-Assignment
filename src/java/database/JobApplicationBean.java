@@ -1,7 +1,5 @@
 package database;
 
-import database.Freelancer;
-import database.FreelancerBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;

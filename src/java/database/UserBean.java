@@ -6,8 +6,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.logging.Logger;
-import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 
 /**

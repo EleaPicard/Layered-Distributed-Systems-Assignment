@@ -8,7 +8,6 @@ package database;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
