@@ -9,9 +9,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.*;
 
 /**
- * Validator for job application ID research 
+ * Validator for job application appliance  
  *
- * @author eleap
+ * @author vince
  */
 @FacesValidator("myvalidatorapply")
 public class MyValidatorApplication implements Validator {
