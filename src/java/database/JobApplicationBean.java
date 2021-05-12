@@ -240,10 +240,10 @@ public class JobApplicationBean implements Serializable {
     }
     
     /**
-     * Return a list of all job applications with a given job description id
+     * Return a list of all job applications with a given provider ID
      *
-     * @param id Id of job description to look for
-     * @return List containing all job applications with given description
+     * @param id ID of provider to look for
+     * @return List containing all job applications with given provider
      */
     public List<JobApplication> getJobApplicationByProviderId(Integer id) {
         // Create an empty list of job application
